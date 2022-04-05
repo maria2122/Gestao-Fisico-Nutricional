@@ -1,0 +1,34 @@
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 150px;
+    }
+  li{
+      font-size: 15pt;
+  }
+    ul li {
+        position: relative;
+        }
+        li ul {
+            
+            position: absolute;
+            left: 150px;
+            top: 0;
+            display: none;
+            }
+
+            ul li a {
+               
+                text-align: center;
+                display: block;
+                text-decoration: none;
+                color: #0b0c0b;
+           
+                background: rgb(131, 233, 162);
+                padding: 20px;
+                border: 0.5px solid rgb(8, 8, 8);
+             }
+             li:hover ul { display: block; }
+
+            
