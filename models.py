@@ -1,11 +1,10 @@
 # O Código é igual ao ID
 class AtividadeFisica:
-    def __init__(self, codigo=None, nome, descricao, gasto_calorico, tipo, ativo):
+    def __init__(self, codigo=None, nome, descricao, gasto_calorico, ativo):
         self._codigo = codigo
         self._nome = nome
         self._descricao = descricao
         self._gasto_calorico = gasto_calorico
-        self._tipo = tipo
         self._ativo = ativo
 
     @property
@@ -32,13 +31,6 @@ class AtividadeFisica:
     @gasto_calorico.setter
     def gasto_calorico(self, gasto_calorico):
         self.__gasto_calorico = gasto_calorico
-
-    @property
-    def tipo(self):
-        return self.__tipo
-    @tipo.setter
-    def tipo(self, tipo):
-        self.__tipo = tipo
 
     @property
     def ativo(self):

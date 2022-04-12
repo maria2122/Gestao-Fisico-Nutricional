@@ -1,5 +1,3 @@
-
-
 from dao import AtividadeFisicaDao
 from models import AtividadeFisica
 
@@ -13,20 +11,37 @@ def atividade():
     else:
         return render_template('atividadefisica.html', atividadesfisicas=lista)
 
-
 @app.route('/criar_atividadefisica', methods = ['POST', ])
 def criar_atividadefisica():
     
+    codigo          = request.form['codigo']
     nome            = request.form['nome']
     descricao       = request.form['descricao']
     gasto_calorico  = request.form['gasto_calorico']
-    tipo            = request.form['tipo']
     ativo           = request.form['ativo']
 
-    novo_atividadefisica = AtividadeFisica(nome=nome, cliente=False, fornecedor=False, funcionario=True, endereco=endereco,
-                                   cpf=cpf, cnpj='', login=login, ativo=True, telefone=telefone, celular=celular, 
-                                   email=email, datacadastro='', codigo='')
+    novo_atividadefisica = AtividadeFisica(codigo='', nome=nome, descricao=descricao, gasto_calorico=gasto_calorico, ativo=ativo)
 
-    funcionario_dao.salvar(novo_funcionario)
-    lista = funcionario_dao.listar()
-    return render_template('funcionario.html', funcionarios=lista)
+    atividadefisica_dao.salvar(novo_atividadefisica)
+    lista = atividadefisica_dao.listar()
+    return render_template('atividadefisica.html', atividadesfisicas=lista)
+
+app.route('/alterar_atividadefisica', methods=['POST', ])
+def alterar_atividadefisica():
+    codigo          = request.form['codigo-alteracao']
+    nome            = request.form['nome-alteracao']
+    descricao       = request.form['descricao-alteracao']
+    gasto_calorico  = request.form['gasto_calorico-alteracao']
+    ativo           = request.form['ativo-alteracao']
+    if request.form.get('atividade-alteracao') == None:
+        atividade = False
+    else:
+        atividade = True
+
+    atividadefisica_editada = AtividadeFisica(codigo=id, nome=nome, descricao=descricao, descricao=descricao, 
+                                              gasto_calorico=gasto_calorico, ativo=ativo)
+
+    atividadefisica_dao.salvar(atividadefisica_editada)
+    lista = atividadefisica_dao.listar()
+
+    return render_template('atividadefisica.html', atividadesfisicas=lista)
