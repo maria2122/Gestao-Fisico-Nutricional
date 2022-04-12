@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-from models import Alimento
-class AlimentoDao:
-    def __init__(self, db):
-        self.__db = db
-=======
 from models import AtividadeFisica
 
 SQL_CRIA_ATIVIDADEFISICA = 'INSERT into atividadefisica (nome, descricao, gasto_calorico, ativo) values (%s,%s,%d,%d)'
@@ -37,4 +31,3 @@ def traduz_atividadesfisicas(atividadesfisicas):
     def cria_atividade_com_tupla(tupla)
         return AtividadeFisica(tupla[1], tupla[2], tupla[3], tupla[4], codigo=tupla[0])
     return list(map(cria_atividade_com_tupla, atividadesfisicas))
->>>>>>> AtividadeFisica_1.1
