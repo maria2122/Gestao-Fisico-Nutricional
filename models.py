@@ -61,3 +61,4 @@ class Alimento:
     
 
 
+        self.__ativo = ativo
