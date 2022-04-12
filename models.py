@@ -1,8 +1,9 @@
 class Alimento:
-    def __init__(self, nome, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None):
+    def __init__(self, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None):
         #Atributos Privados
         self.__codigo = codigo
         self.__nome = nome
+        self.__descricao = descricao
         self.__valor_calorico = valor_calorico
         self.__valor_gordura = valor_gordura 
         self.__valor_proteina = valor_proteina
@@ -22,6 +23,13 @@ class Alimento:
     @nome.setter
     def nome(self, nome):
         self.__nome = nome
+    #DESCRIÇÃO
+    @property
+    def descricao(self):
+        return self.__descricao
+    @descricao.setter
+    def nome(self, descricao):
+        self.__descricao = descricao
     #VALOR_CALORICO
     @property
     def valor_calorico(self):
