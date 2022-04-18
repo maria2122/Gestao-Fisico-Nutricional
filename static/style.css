@@ -1,34 +1,71 @@
-ul {
+nav[id="vertical"] ul {
     margin: 0;
     padding: 0;
     list-style: none;
     width: 150px;
     }
-  li{
-      font-size: 15pt;
-  }
-    ul li {
+  
+  nav[id="vertical"] ul li {
         position: relative;
+        font-size: 15pt;
+       
         }
-        li ul {
-            
+        
+        nav[id="vertical"] li ul {
+          
             position: absolute;
-            left: 120px;
+            left: 150px;
             top: 0;
             display: none;
             }
 
-            ul li a {
-               
+           nav[id="vertical"] ul li a {
+                border-radius: 10px;
                 text-align: center;
                 display: block;
                 text-decoration: none;
                 color: #0b0c0b;
-           
                 background: rgb(131, 233, 162);
                 padding: 20px;
                 border: 0.5px solid rgb(8, 8, 8);
              }
-             li:hover ul { display: block; }
+           nav[id="vertical"] li:hover ul { display: block; }
 
-            
+          
+        
+           nav[id="horizontal"] ul {
+            margin: 50;
+            padding: 50;
+            list-style: circle;
+            width: 450px;
+            }
+          
+            nav[id="horizontal"] ul li {
+                position: absolute;
+                font-size: 15pt;
+                margin-left: 500pt;
+                
+               
+                }
+                
+                nav[id="horizontal"] li ul {
+                  
+                    position: absolute;
+                    left: 150px;
+                    top: 0;
+                    display: none;
+                    }
+        
+                    nav[id="horizontal"] ul li a {
+                        border-radius: 10px;
+                        text-align: center;
+                        display: block;
+                        text-decoration: none;
+                        color: #0b0c0b;
+                        background: rgb(131, 233, 162);
+                        padding: 20px;
+                        border: 0.5px solid rgb(8, 8, 8);
+                     }
+                     nav[id="horizontal"] li:hover ul { display: block; }
+        
+                  
