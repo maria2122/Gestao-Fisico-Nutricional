@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>codigo</th>
+                <th>nome</th>
+                <th>descricao</th>
+                <th>gasto_calorico</th>
+                <th>ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for atividadefisica in atividadesfisicas %}
+            <tr>
+                <td>{{atividadefisica.codigo}}</td>
+                <td>{{atividadefisica.nome}}</td>
+                <td>{{atividadefisica.descricao}}</td>
+                <td>{{atividadefisica.gasto_calorico}}</td>
+                <td>{{atividadefisica.ativo}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>
