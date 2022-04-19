@@ -39,10 +39,10 @@ def alterar_atividadefisica():
     descricao       = request.form['descricao-alteracao']
     gasto_calorico  = request.form['gasto_calorico-alteracao']
     ativo           = request.form['ativo-alteracao']
-    if request.form.get('atividade-alteracao') == None:
-        atividade = False
+    if request.form.get('atividadefisica-alteracao') == None:
+        atividadefisica = False
     else:
-        atividade = True
+        atividadefisica = True
 
     atividadefisica_editada = AtividadeFisica(codigo=id, nome=nome, descricao=descricao, descricao=descricao, 
                                               gasto_calorico=gasto_calorico, ativo=ativo)

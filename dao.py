@@ -14,9 +14,9 @@ class AtividadeFisicaDao:
         cursor = self.__db.connection.cursor()
 
         if (atividadefisica._id):
-            cursor.execute(SQL_ATUALIZA_ATIVIDADEFISICA, (atividadefisica._nome, atividadefisica._descricao, atividadefisica._gasto_calorico, atividadefisica._ativo, atividadefisica._id))
+            cursor.execute(SQL_ATUALIZA_ATIVIDADEFISICA, (atividadefisica.__nome, atividadefisica.__descricao, atividadefisica.__gasto_calorico, atividadefisica.__ativo, atividadefisica._id))
         else:
-            cursor.execute(SQL_CRIA_ATIVIDADEFISICA, (atividadefisica._nome, atividadefisica._descricao, atividadefisica._gasto_calorico, atividadefisica._ativo))
+            cursor.execute(SQL_CRIA_ATIVIDADEFISICA, (atividadefisica.__nome, atividadefisica.__descricao, atividadefisica.__gasto_calorico, atividadefisica.__ativo))
             cursor._id = cursor.lastrowid
 
         self.__db.connection.commit()
@@ -25,7 +25,7 @@ class AtividadeFisicaDao:
     def listar(self):
         cursor = self._db.connection.cursor()
         cursor.execute(SQL_BUSCA_ATIVIDADEFISICA)
-        atividade = traduz_atividade(cursor.fetchall())
+        atividadefisica = traduz_atividadesfisicas(cursor.fetchall())
         return atividadesfisicas
 
 def traduz_atividadesfisicas(atividadesfisicas):
