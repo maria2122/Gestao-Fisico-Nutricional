@@ -35,7 +35,7 @@ CREATE TABLE `alimento_cardapio` (
 CREATE TABLE `atividade_fisica` (
   `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `nome` varchar(40) NOT NULL,
-  `descricaoo` varchar(100) NOT NULL,
+  `descricao` varchar(100) NOT NULL,
   `gasto_calorico` int(10) NOT NULL,
   `ativo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
