@@ -68,7 +68,7 @@ class Alimento:
 
 # O Código é igual ao ID
 class AtividadeFisica:
-    def __init__(self, codigo=None, nome, descricao, gasto_calorico, ativo):
+    def __init__(self, nome, descricao, gasto_calorico, ativo, codigo=None):
         self.__codigo = codigo
         self.__nome = nome
         self.__descricao = descricao

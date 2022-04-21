@@ -1,14 +1,18 @@
-from dao import AtividadeFisicaDao
-from models import AtividadeFisica
-from crypt import methods
-from urllib import request
-from dao import AlimentoDao
-from models import Alimento
+from dao import AtividadeFisicaDao, AlimentoDao
+from models import AtividadeFisica, Alimento
+from flask import Flask, render_template, request, session, redirect
 
+app = Flask(__name__)
+app.secret_key = 'teste'
+
+DB = "sqlite:///dbgestaofisiconutricional.db"
 atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
-DB = ""
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+    
 @app.route('/atividadefisica')
 def atividade():
     lista = atividadefisica_dao.listar()
@@ -44,7 +48,7 @@ def alterar_atividadefisica():
     else:
         atividadefisica = True
 
-    atividadefisica_editada = AtividadeFisica(codigo=id, nome=nome, descricao=descricao, descricao=descricao, 
+    atividadefisica_editada = AtividadeFisica(codigo=id, nome=nome, descricao=descricao,
                                               gasto_calorico=gasto_calorico, ativo=ativo)
 
     atividadefisica_dao.salvar(atividadefisica_editada)
@@ -92,4 +96,7 @@ def alterar_alimento():
     lista = alimento_dao.listar()
 
     return render_template('alimento.html', alimentos=lista)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
