@@ -1,5 +1,5 @@
 {%extends "template.html"%}
-    {%block conteudo %}
+{%block conteudo %}
     <form>
         <label>Nome</label>
         <br>
@@ -19,9 +19,29 @@
         <br>
         <input type="submit" name="submit" id="enviar"> 
     
-    
-    
-    
      </form>
 
-     {%endblock %}
+     <table>
+        <thead>
+            <tr>
+                <th>codigo</th>
+                <th>nome</th>
+                <th>descricao</th>
+                <th>gasto_calorico</th>
+                <th>ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for atividadefisica in atividadesfisicas %}
+            <tr>
+                <td>{{atividadefisica.codigo}}</td>
+                <td>{{atividadefisica.nome}}</td>
+                <td>{{atividadefisica.descricao}}</td>
+                <td>{{atividadefisica.gasto_calorico}}</td>
+                <td>{{atividadefisica.ativo}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{%endblock %}
