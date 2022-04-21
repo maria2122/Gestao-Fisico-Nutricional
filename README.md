@@ -7,9 +7,13 @@ Projeto de Engenharia de Software II
 O ambiente virtual vai fazer uma cópia da instalação do python que você tem na sua máquina, criando assim um ambiente isolado, onde todas dependências instaladas nele não interfere a versão original da máquina, fazendo assim não ter conflitos entre versões de dependências e também deixar o interpretador o mais leve possível, tendo somente os módulos e pacotes necessários para o projeto. É imensamente recomendado criar um ambiente virtual para cada projeto python.
 
 ```python -m venv .venv``` Para criar um ambiente virtual.
+
 ```cd ./.venv``` Para entrar dentro da pasta do ambiente virtual recentemente criado.
+
 ```cd ./Scripts``` Para entrar na pasta de scripts que podem ser executados pelo ambiente virtual.
+
 ```activate.bat``` Para ativar o ambiente virtual, a partir daqui qualquer comando realizado, esta sendo executado com o "python" deste ambiente.
+
 Agora vamos voltar para a raiz do projeto:
 ```cd ..```
 ```cd ..```
