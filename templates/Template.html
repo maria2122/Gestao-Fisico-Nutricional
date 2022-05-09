@@ -28,44 +28,28 @@
     
 </head>
 
+<aside>
+<input type="checkbox" id="checkbox">
+<label class="btn" for="checkbox"> <span>Menu</span></label>
 
-<section>
-    <nav id="horizontal" >
+<div class="sidebar">
+    <ul>
+        <a href="#"><li>HOME</li></a>
+        <a href="#"><li>ALIMENTOS</li></a>
+        <a href="#"><li>CARDAPIO</li></a>
+        <a href="#"><li>ATIVIDADE FISICA</li></a>
+        <a href="#"><li>CONTATO</li></a>
+        <a href="#"><li>AJUDA</li></a>
+        <a href="#"><li>LOGIN</li></a>
+        <a href="#"><li>LOGOUT</li></a>
+        
+    </ul>
+</div>
+</aside>
 
-        <ul class="nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="Alimento.html">Alimentos</a></li>
-                    <li><a href="#">Cardapio</a>
-                       <ul>
-                            <li><a href="Cardapio.html">Novo Cardapio</a></li>
-                            <li><a href="#">Abrir Cardapio</a></li>
-                         </ul>
-                  </li>
-              <li><a href="AtividadeFisica.html">Ativida Fisica</a></li>
-              <li><a href="Contato.html">Contato</a></li>
-              <li><a href="Ajuda.html">Ajuda</a></li>
-      </ul>
-      </nav>
-</section>
 
-<section>
-    <nav id="vertical">
-        <ul class="nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="Alimento.html">Alimentos</a></li>
-                    <li><a href="">Cardapio</a>
-                       <ul>
-                            <li><a href="Cardapio.html">Novo Cardapio</a></li>
-                            <li><a href="#">Abrir Cardapio</a></li>
-                         </ul>
-                  </li>
-              <li><a href="AtividadeFisica.html">Ativida Fisica</a></li>
-              <li><a href="Contato.html">Contato</a></li>
-              <li><a href="Ajuda.html">Ajuda</a></li>
-      </ul>
-      </nav>
-    </section>
-
+  
+  
    
 <body>
    
@@ -73,11 +57,11 @@
         página que tem como template padrão este arquivo -->
         {% block conteudo %} {%endblock %}
       
-   
+        
    <footer>
 
     <p>@copyright Fortunato Roncholeta,Isaias Santos,Kevin Willians,Maria jaqueline</p>
    </footer>
-           
+        <script src="/static/script.js"></script>
 </body>
 </html>

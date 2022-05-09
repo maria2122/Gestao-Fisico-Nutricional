@@ -1,71 +1,124 @@
-nav[id="vertical"] ul {
-    margin: 0;
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f1f1;
+}
+
+#checkbox, .btn span { /* PARA NAO APARECER A CAIXINHA DO CHECK BOX */
+    display: none;
+}
+
+/* Menu button  */
+.btn {
+    display: block;
+    background-color: #34af61;
+    color: rgb(246, 246, 246);
+    width: 55px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: width .3s ease-in-out;
+}
+
+
+/* Sidebar - starts */
+.sidebar {
+    background-color: #181d18;
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    z-index: 1111;
+    transition: transform .3s ease-in-out;
+    transform: translateX(-250px);
+}
+
+.sidebar ul {
     padding: 0;
-    list-style: none;
-    width: 150px;
-    }
-  
-  nav[id="vertical"] ul li {
-        position: relative;
-        font-size: 15pt;
-       
-        }
-        
-        nav[id="vertical"] li ul {
-          
-            position: absolute;
-            left: 150px;
-            top: 0;
-            display: none;
-            }
+    margin: 0;
+    list-style-type: none;
+}
 
-           nav[id="vertical"] ul li a {
-                border-radius: 10px;
-                text-align: center;
-                display: block;
-                text-decoration: none;
-                color: #0b0c0b;
-                background: rgb(131, 233, 162);
-                padding: 20px;
-                border: 0.5px solid rgb(8, 8, 8);
-             }
-           nav[id="vertical"] li:hover ul { display: block; }
+.sidebar ul a {
+    position: relative;
+    text-decoration: none;
+    display: block;
+    background-color: transparent;
+    color: #f7effc;
+    padding: 15px 20px;
+    font-size: 16px;
+}
 
-          
-        
-           nav[id="horizontal"] ul {
-            margin: 50;
-            padding: 50;
-            list-style: circle;
-            width: 450px;
-            }
-          
-            nav[id="horizontal"] ul li {
-                position: absolute;
-                font-size: 15pt;
-                margin-left: 500pt;
-                
-               
-                }
-                
-                nav[id="horizontal"] li ul {
-                  
-                    position: absolute;
-                    left: 150px;
-                    top: 0;
-                    display: none;
-                    }
-        
-                    nav[id="horizontal"] ul li a {
-                        border-radius: 10px;
-                        text-align: center;
-                        display: block;
-                        text-decoration: none;
-                        color: #0b0c0b;
-                        background: rgb(131, 233, 162);
-                        padding: 20px;
-                        border: 0.5px solid rgb(8, 8, 8);
-                     }
-                     nav[id="horizontal"] li:hover ul { display: block; }
-        
-                  
+.sidebar ul a li i {
+    margin-right: 15px;
+}
+
+/* Add the word "New" to the second item and "2" to the third item */
+.sidebar ul a:nth-child(2)::after, .sidebar ul a:nth-child(3)::after {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -9px;
+    color: #fff;
+    font-size: 13px;
+    padding: 0 7px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.sidebar ul a:nth-child(2)::after {
+    content: "New";
+    background-color: tomato;
+}
+
+.sidebar ul a:nth-child(3)::after {
+    content: "2";
+    background-color: #247D9E;
+}
+
+/* Add margin to the icon in the second item */
+.sidebar ul a:nth-child(2) li i {
+    margin-left: 4px;
+    margin-right: 19px;
+}
+
+.sidebar ul a:hover, .sidebar ul a.active {
+    background-color: #44c25b;
+    color: #fff;
+}
+
+.sidebar ul a:hover::before, .sidebar ul a.active::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background-color: #247D9E;
+    width: 4px;
+    height: 100%;
+}
+/* Sidebar - ends */
+
+/* Effect of showing the sidebar - starts */
+#checkbox:checked ~ .sidebar {
+    transform: translateX(0);
+}
+
+#checkbox:checked + .btn {
+    width: 250px;
+    padding: 0 20px;
+}
+
+#checkbox:checked + .btn span { /* Show again the word "Menu" in the button */
+    display: inline;
+}
+/* Effect of showing the sidebar - ends */
