@@ -16,15 +16,16 @@ body {
 
 /* Menu button  */
 .btn {
-    display: block;
+    display: grid;
     background-color: #34af61;
     color: rgb(246, 246, 246);
-    width: 55px;
-    height: 50px;
+    width: 50px;
+    height: 60px;
     line-height: 50px;
-    padding: 0 20px;
+    /*muda o tipo de cursor*/
     cursor: pointer;
-    transition: width .3s ease-in-out;
+     /*transiçao do menu*/
+    transition: width .4s ease-in-out;
 }
 
 
@@ -34,9 +35,9 @@ body {
     position: fixed;
     width: 250px;
     height: 100%;
-    z-index: 1111;
-    transition: transform .3s ease-in-out;
-    transform: translateX(-250px);
+    transition: transform .4s ease-in-out;
+    transform:  translateX(-190px);
+    
 }
 
 .sidebar ul {
