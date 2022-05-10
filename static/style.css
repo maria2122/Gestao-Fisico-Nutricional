@@ -4,6 +4,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     font-family: 'Roboto', Arial, sans-serif;
+    margin: 0px;
 }
 
 body {
