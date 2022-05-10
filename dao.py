@@ -20,12 +20,12 @@ class AtividadeFisicaDao:
             cursor._id = cursor.lastrowid
 
         self.__db.connection.commit()
-        return atividadesfisicas
+        return atividadefisica
 
     def listar(self):
         cursor = self._db.connection.cursor()
         cursor.execute(SQL_BUSCA_ATIVIDADEFISICA)
-        atividadefisica = traduz_atividadesfisicas(cursor.fetchall())
+        atividadesfisicas = traduz_atividadesfisicas(cursor.fetchall())
         return atividadesfisicas
 
 def traduz_atividadesfisicas(atividadesfisicas):
