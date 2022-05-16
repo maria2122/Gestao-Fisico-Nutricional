@@ -2,7 +2,7 @@ from models import Alimento
 from models import AtividadeFisica
 
 SQL_CRIA_ATIVIDADEFISICA = 'INSERT into atividadefisica (nome, descricao, gasto_calorico, ativo) values (%s,%s,%d,%d)'
-SQL_BUSCA_ATIVIDADEFISICA = 'SELECT codigo, nome, descricao, gasto_calorico, ativo from atividadefisica'
+SQL_BUSCA_ATIVIDADEFISICA = 'SELECT id, nome, descricao, gasto_calorico, ativo from atividade_fisica'
 SQL_ATUALIZA_ATIVIDADEFISICA = 'UPDATE atividadefisica SET nome=%s, descricao=%s, gasto_calorico=%d, ativo=%d, where codigo=%s'
 SQL_DELETA_ATIVIDADEFISICA = 'delete from atividadefisica where codigo = %s'
 
@@ -10,22 +10,22 @@ class AtividadeFisicaDao:
     def __init__(self, db):
         self.__db=db
 
-    def salvar(self, atividadefisica):
-        cursor = self.__db.connection.cursor()
+    def salvar(self, atividadefisica:AtividadeFisica):
+        cursor = self.__db.cursor()
 
         if (atividadefisica._id):
-            cursor.execute(SQL_ATUALIZA_ATIVIDADEFISICA, (atividadefisica.__nome, atividadefisica.__descricao, atividadefisica.__gasto_calorico, atividadefisica.__ativo, atividadefisica._id))
+            cursor.execute(SQL_ATUALIZA_ATIVIDADEFISICA, (atividadefisica.nome, atividadefisica.descricao, atividadefisica.gasto_calorico, atividadefisica.ativo, atividadefisica.codigo))
         else:
-            cursor.execute(SQL_CRIA_ATIVIDADEFISICA, (atividadefisica.__nome, atividadefisica.__descricao, atividadefisica.__gasto_calorico, atividadefisica.__ativo))
+            cursor.execute(SQL_CRIA_ATIVIDADEFISICA, (atividadefisica.nome, atividadefisica.descricao, atividadefisica.gasto_calorico, atividadefisica.ativo))
             cursor._id = cursor.lastrowid
 
-        self.__db.connection.commit()
-        return atividadesfisicas
+        self.__db.commit()
+        return atividadefisica
 
     def listar(self):
-        cursor = self._db.connection.cursor()
+        cursor = self.__db.cursor()
         cursor.execute(SQL_BUSCA_ATIVIDADEFISICA)
-        atividadefisica = traduz_atividadesfisicas(cursor.fetchall())
+        atividadesfisicas = traduz_atividadesfisicas(cursor.fetchall())
         return atividadesfisicas
 
 def traduz_atividadesfisicas(atividadesfisicas):
