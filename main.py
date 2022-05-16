@@ -14,12 +14,12 @@ def index():
     return render_template('index.html')
     
 @app.route('/atividadefisica')
-def atividade():
+def atividadefisica():
     lista = atividadefisica_dao.listar()
-    if 'usuario_logado' not in session or session['usuario_logado'] == None:
-        return redirect('/login?proxima=')
-    else:
-        return render_template('atividadefisica.html', atividadesfisicas=lista)
+    # if 'usuario_logado' not in session or session['usuario_logado'] == None:
+    #     return redirect('/login?proxima=')
+    # else:
+    return render_template('AtividadeFisica.html', atividadesfisicas=lista)
 
 @app.route('/criar_atividadefisica', methods = ['POST', ])
 def criar_atividadefisica():
@@ -34,7 +34,7 @@ def criar_atividadefisica():
 
     atividadefisica_dao.salvar(novo_atividadefisica)
     lista = atividadefisica_dao.listar()
-    return render_template('atividadefisica.html', atividadesfisicas=lista)
+    return render_template('AtividadeFisica.html', atividadesfisicas=lista)
 
 app.route('/alterar_atividadefisica', methods=['POST', ])
 def alterar_atividadefisica():
@@ -54,13 +54,13 @@ def alterar_atividadefisica():
     atividadefisica_dao.salvar(atividadefisica_editada)
     lista = atividadefisica_dao.listar()
 
-    return render_template('atividadefisica.html', atividadesfisicas=lista)
+    return render_template('AtividadeFisica.html', atividadesfisicas=lista)
 
 
 @app.route('/alimento')
 def alimento():
     lista = alimento_dao.listar()
-    return render_template('alimento.html', alimentos = lista)
+    return render_template('alimento.html')
 
 @app.route('/cria_alimento', methods = ['POST', ])
 def cria_alimento():
@@ -77,7 +77,7 @@ def cria_alimento():
 
     alimento_dao.salvar(novo_alimento)
     lista = alimento_dao.listar()
-    return render_template('alimento.html', alimentos = lista)
+    return render_template('alimento.html')
 
 @app.route('/alterar_alimento', methods=['POST', ])
 def alterar_alimento():
@@ -95,7 +95,7 @@ def alterar_alimento():
     alimento_dao.salvar(alimento_editado)
     lista = alimento_dao.listar()
 
-    return render_template('alimento.html', alimentos=lista)
+    return render_template('alimento.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
