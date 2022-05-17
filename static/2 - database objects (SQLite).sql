@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS alimento;
+DROP TABLE IF EXISTS cardapio;
+DROP TABLE IF EXISTS alimento_cardapio;
+DROP TABLE IF EXISTS atividade_fisica;
+
 CREATE TABLE "alimento" (
   "id" INTEGER,
   "nome" TEXT NOT NULL,

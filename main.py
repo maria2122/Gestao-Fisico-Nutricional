@@ -1,13 +1,17 @@
-from dao import AtividadeFisicaDao, AlimentoDao
+from dao import AtividadeFisicaDao, AlimentoDao, load_banco_de_dados
 from models import AtividadeFisica, Alimento
 from flask import Flask, render_template, request, session, redirect
+
 
 app = Flask(__name__)
 app.secret_key = 'teste'
 
-DB = "sqlite:///dbgestaofisiconutricional.db"
+DB = "dbgestaofisiconutricional.db"
 atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
+
+load_banco_de_dados(DB, 'CriaBD')
+load_banco_de_dados(DB, 'InsereDados')
 
 @app.route('/')
 def index():
