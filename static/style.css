@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-
+/*====ZERA CONFIGS====*/
 *{
     margin: 0;
     padding: 0;
@@ -22,23 +22,47 @@ header{
 .left span{
     color: #51b3ec;
 }
+/*====BOTAO SAIR====*/
 .sair_btn{
     padding: 5px;
+    width: 80px;
     background: #51b3ec;
     text-decoration: none;
     float: right;
+    text-align: center;
     margin-top: -30px;
     margin-right: 40px;
-    border-radius: 2px;
-    font-size: 15px;
+    border-radius: 5px;
+    font-size: 20px;
     font-weight: 500;
     color: #fff;
     transition: 0.5s;
     transition-property: background;
 }
 .sair_btn:hover{
-    background: #4a9fcf;
+    background: #e61414;
 }
+/*====BOTAO LOGIN====*/
+.login_btn{
+    padding: 5px;
+    width: 80px;
+    text-align: center;
+    background: #51b3ec;
+    text-decoration: none;
+    float: right;
+    margin-top: -30px;
+    margin-right: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    transition: 0.5s;
+    transition-property: background;
+}
+.login_btn:hover{
+    background: #4acf6b;
+}
+/*====BARRA LATERAL====*/
 .sidebar{
     position: fixed;
     width: 250px;
@@ -50,18 +74,21 @@ header{
     transition: 0.5s;
     transition-property: left;
 }
+/*====FOTO PERFIL====*/
 .sidebar .image{
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 100px;
 }
+/*====NICK USUARIO====*/
 .sidebar h2{
     color: #ccc;
     margin-top: 0;
     margin-bottom: 20px;
 }
+/*====OPÇAO DO MENU====*/
 .sidebar a{
-    color: #fff;
+    color: rgb(255, 255, 255);
     display: block;
     width: 100%;
     line-height: 60px;
@@ -77,6 +104,7 @@ header{
 .sidebar ion-icon{
     padding-right: 10px;
 }
+
 label #sidebar_btn{
     z-index: 1;
     position: fixed;
