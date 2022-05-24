@@ -1,5 +1,4 @@
-from models import Alimento
-from models import AtividadeFisica
+from models import Alimento, Cardapio, AtividadeFisica
 from sqlite3 import connect
 
 
@@ -8,6 +7,8 @@ SQL_CRIA_ATIVIDADEFISICA = 'INSERT into atividadefisica (nome, descricao, gasto_
 SQL_BUSCA_ATIVIDADEFISICA = 'SELECT id, nome, descricao, gasto_calorico, ativo from atividade_fisica'
 SQL_ATUALIZA_ATIVIDADEFISICA = 'UPDATE atividadefisica SET nome=%s, descricao=%s, gasto_calorico=%d, ativo=%d, where codigo=%s'
 SQL_DELETA_ATIVIDADEFISICA = 'delete from atividadefisica where codigo = %s'
+
+SQL_DELETA_CARDAPIO='DELETE FROM cardapio WHERE id = ? '
 
 class AtividadeFisicaDao:
     def __init__(self, db):
@@ -93,6 +94,47 @@ def traduz_alimentos(alimentos):
 
     return list(map(cria_alimento_com_tupla, alimentos))
 
+
+class CardapioDao:
+    def __init__(self, db):
+        self.__db = db
+    def salvar(self, cardapio:Cardapio):
+        if MECANISMO_BANCO_NOME == 'SQLITE':
+            conexao = connect(self.__db)
+            cursor = conexao.cursor()
+        else:
+            cursor = self.__db.cursor()
+
+        if(cardapio.codigo):
+            dados_cardapio_atualizacao = [cardapio.data_inicio, cardapio.data_fim]
+            SQL_ATUALIZA_CARDAPIO='UPDATE cardapio SET data_inicio = ?, data_fim = ? WHERE id = ? '
+            cursor.execute(SQL_ATUALIZA_CARDAPIO, dados_cardapio_atualizacao)
+        else:
+            dados_cardapio_insercao = [cardapio.data_inicio, cardapio.data_fim]
+            SQL_CRIA_CARDAPIO='INSERT INTO cardapio (data_inicio, data_fim) VALUES (?, ?) '
+            cursor.execute(SQL_CRIA_CARDAPIO, dados_cardapio_insercao)
+        self.__db.commit()
+        return cardapio
+    
+    def listar(self):
+        if MECANISMO_BANCO_NOME == 'SQLITE':
+            conexao = connect(self.__db)
+            cursor = conexao.cursor()
+        else:
+            cursor = self.__db.cursor()
+        
+        SQL_BUSCA_CARDAPIO='SELECT id, data_inicio, data_fim ' \
+        'FROM cardapio '
+        cursor.execute(SQL_BUSCA_CARDAPIO)
+        cardapios = traduz_cardapio(cursor.fetchall())
+        return cardapios
+
+def traduz_cardapio(cardapios):
+    def cria_cardapio_com_tupla(tupla):
+        return Cardapio(data_inicio=tupla[1], data_fim=tupla[2], codigo=tupla[0])
+    
+    return list(map(cria_cardapio_com_tupla, cardapios))
+
 # Operacao: InsereDados Ou CriaBD
 def load_banco_de_dados(Conexao, Operacao):
     if MECANISMO_BANCO_NOME == 'SQLITE':
@@ -118,5 +160,3 @@ def load_banco_de_dados(Conexao, Operacao):
 
     if MECANISMO_BANCO_NOME == 'SQLITE':
         conexao.close()
-    
-

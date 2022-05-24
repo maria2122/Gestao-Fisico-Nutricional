@@ -1,3 +1,6 @@
+from ast import Return
+
+
 class Alimento:
     def __init__(self, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None):
         #Atributos Privados
@@ -113,3 +116,33 @@ class AtividadeFisica:
     @ativo.setter
     def ativo(self, ativo):
         self.__ativo = ativo
+
+class Cardapio:
+    def __init__(self, data_inicio, data_fim, codigo=None):
+        # Atributos Privados
+        self.__codigo=codigo
+        self.__data_inicio=data_inicio
+        self.__data_fim=data_fim
+
+    # O atributo código apenas obtê-lo não alterá-lo
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    # Properts e Setters
+    # data_inicio
+    @property
+    def data_inicio(self):
+        return self.__data_inicio
+    @data_inicio.setter
+    def data_inicio(self, data_inicio):
+        self.__data_inicio=data_inicio
+    # data_fim
+    @property
+    def data_fim(self):
+        return self.__data_fim
+    @data_fim.setter
+    def data_fim(self, data_fim):
+        self.__data_fim=data_fim
+    
+

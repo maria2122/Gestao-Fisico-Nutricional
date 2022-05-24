@@ -1,5 +1,5 @@
-from dao import AtividadeFisicaDao, AlimentoDao, load_banco_de_dados
-from models import AtividadeFisica, Alimento
+from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, load_banco_de_dados
+from models import AtividadeFisica, Alimento, Cardapio
 from flask import Flask, render_template, request, session, redirect
 
 
@@ -9,6 +9,7 @@ app.secret_key = 'teste'
 DB = "dbgestaofisiconutricional.db"
 atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
+cardapio_dao = CardapioDao(DB)
 
 load_banco_de_dados(DB, 'CriaBD')
 load_banco_de_dados(DB, 'InsereDados')
@@ -100,6 +101,32 @@ def alterar_alimento():
     lista = alimento_dao.listar()
 
     return render_template('alimento.html')
+
+@app.route('/cardapio')
+def cardapio():
+    lista = cardapio_dao.listar()
+    return render_template('Cardapio.html', cardapios=lista)
+
+@app.route('/cria_cardapio', methods = ['POST', ])
+def cria_cardapio():
+    data_inicio = request.form['data_inicio']
+    data_fim = request.form['data_fim']
+    novo_cardapio = Cardapio(data_inicio=data_inicio, data_fim=data_fim)
+
+    cardapio_dao.salvar(novo_cardapio)
+    lista = cardapio_dao.listar()
+    return render_template('Cardapio.html', cardapios=lista)
+
+@app.route('/alterar_cardapio', methods=['POST', ])
+def alterar_cardapio():
+    id = request.form['id-alteracao']
+    data_inicio = request.form['data_inicio']
+    data_fim = request.form['data_fim']
+    cardapio_atualizado = Cardapio(data_inicio=data_inicio, data_fim=data_fim, codigo=id)
+    cardapio_dao.salvar(cardapio_atualizado)
+    lista = cardapio_dao.listar()
+
+    return render_template('Cardapio.html', cardapios=lista)
 
 if __name__ == '__main__':
     app.run(debug=True)

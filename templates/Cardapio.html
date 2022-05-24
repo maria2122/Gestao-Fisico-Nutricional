@@ -1,12 +1,9 @@
 {%extends "Template.html"%}
     {%block conteudo %}
+    <center>
     <form>
-        <label>Alimento</label>
-        <br>
-        <input type="text" name="Alimento" id="Alimento">
-    
-        <label>Ativo</label>
-        <input type="checkbox" name=ativo value="1"  id="ativo">
+        <label>Código</label>
+        <input type="number" name="id" id="id" readonly>
         <br>
         <label>Data Inicio</label>
         <input type="date" name="data_inicio" id="data_inicio">
@@ -15,11 +12,24 @@
         <input type="date" name="data_fim" id="data_fim">
         <br>
         <input type="submit" name="submit" id="enviar"> 
-    
-    
-    
-    
      </form>
 
-
+     <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Data Inicio</th>
+                <th>Data Fim</th>
+        </thead>
+        <tbody>
+        {% for cardapio in cardapios %}
+            <tr>
+                <td>{{cardapio.codigo}}</td>
+                <td>{{cardapio.data_inicio}}</td>
+                <td>{{cardapio.data_fim}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </center>
 {%endblock %}
