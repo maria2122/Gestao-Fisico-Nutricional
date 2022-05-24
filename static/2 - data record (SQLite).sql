@@ -19,6 +19,9 @@ VALUES (5, "Filé de frango 100g","Filé de frango 100g",101,0,0,0,1);
 INSERT INTO alimento(id, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo) 
 VALUES (6, "Filé-mignon 100g","Filé-mignon 100g",140,0,0,0,1);
 
+INSERT INTO alimento(id, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo) 
+VALUES (7, "Contra-filé 100g","Contra-filé 100g",120,0,0,0,1);
+
 --------------------------------------------------------------------------------
 -- Cardapio --------------------------------------------------------------------
 --------------------------------------------------------------------------------

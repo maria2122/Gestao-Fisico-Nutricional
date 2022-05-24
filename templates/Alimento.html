@@ -1,13 +1,14 @@
-   {% extends "Template.html"%}
-    {% block conteudo %}
+{% extends "Template.html"%}
+{% block conteudo %}
+<center>
 <div>
-    <form>
+    <form action="/cria_alimento" method="POST">
         <label>Alimento</label>
         <br>
         <input type="text" name="nome" id="nome">
-    <br>
+        <br>
         <label>descricao</label>
-        <input type="text"  name="descricao" id="descricao">
+        <input type="text" name="descricao" id="descricao">
         <br>
         <label>Valor Calorico</label>
         <input type="number" name="valor_calorico" id="valor_calorico">
@@ -22,12 +23,42 @@
         <input type="number" name="valor_carboidrato" id="valor_carboidrato">
         <br>
         <label>Ativo</label>
-        <input type="checkbox"  value="1" name="ativo" id="Ativo">
+        <input type="checkbox" value="1" name="ativo" id="Ativo">
         <br>
-        <input type="submit" name="submit" id="enviar"> 
-     </form>
-
+        <input type="submit" name="submit" id="enviar">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>CODIGO</th>
+                <th>NOME</th>
+                <th>DESCRICAO</th>
+                <th>VALOR CALORICO</th>
+                <th>VALOR GORDURA</th>
+                <th>VALOR PROTEINA</th>
+                <th>VALOR CARBOIDRATO</th>
+                <th>ATIVO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alimento in alimentos %}
+            <tr>
+                <td>{{alimento.codido}}</td>
+                <td>{{alimento.nome}}</td>
+                <td>{{alimento.descricao}}</td>
+                <td>{{alimento.valor_calorico}}</td>
+                <td>{{alimento.valor_gordura}}</td>
+                <td>{{alimento.valor_proteina}}</td>
+                <td>{{alimento.valor_carboidrato}}</td>
+                <td>{{alimento.ativo}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
- 
+<script>
+    //teste script
     
+</script>
+</center>
 {%endblock %}

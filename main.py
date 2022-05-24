@@ -64,7 +64,7 @@ def alterar_atividadefisica():
 @app.route('/alimento')
 def alimento():
     lista = alimento_dao.listar()
-    return render_template('alimento.html')
+    return render_template('Alimento.html', alimentos = lista)
 
 @app.route('/cria_alimento', methods = ['POST', ])
 def cria_alimento():
@@ -81,7 +81,7 @@ def cria_alimento():
 
     alimento_dao.salvar(novo_alimento)
     lista = alimento_dao.listar()
-    return render_template('alimento.html')
+    return render_template('Alimento.html', alimentos = lista)
 
 @app.route('/alterar_alimento', methods=['POST', ])
 def alterar_alimento():
@@ -99,7 +99,7 @@ def alterar_alimento():
     alimento_dao.salvar(alimento_editado)
     lista = alimento_dao.listar()
 
-    return render_template('alimento.html')
+    return render_template('Alimento.html',  alimentos = lista)
 
 if __name__ == '__main__':
     app.run(debug=True)
