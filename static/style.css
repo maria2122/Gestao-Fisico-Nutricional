@@ -13,6 +13,8 @@ header{
     height: 90px;
 }
 
+
+
 form{
     margin-top: 100px;
     max-width: 100%;
@@ -27,7 +29,9 @@ table{
     text-align: center;
 }
 body{
-        grid-template-columns: repeat      
+        font-family: 'Poppins', sans-serif;
+        grid-template-columns: repeat 
+        
 }
 .left h3{
     color: #fff;

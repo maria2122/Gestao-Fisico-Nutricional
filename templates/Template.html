@@ -28,6 +28,7 @@
 
 
 <body>
+    <div class="card">
     <input type="checkbox" id="check">
     <!--header começo-->
     <header>
@@ -47,7 +48,7 @@
     <!--sidebar começo-->
     <div class="sidebar">
         <center>
-            <img src="https://alo.com.br/wp-content/uploads/2021/02/34a5aebacf141bd785ac94e449e768b2-1.jpg" class="image" alt="">
+            <img src="../static/IMG/avatar.svg" class="image" alt="">
             <h2>Maria</h2>
         </center>
 
@@ -61,15 +62,18 @@
 
     </div>
     <!--sidebar final-->
-    <div class="content"></div>
+    <div class="card-body"></div>
     <!-- Indica local onde o restante da página será carregado para cada
         página que tem como template padrão este arquivo -->
 
+        
+    {% block conteudo %} {%endblock %}
+        
 
         
-        {% block conteudo %} {%endblock %}
+       
       
-        
+</div> 
    <footer>
 
     <p>@copyright Fortunato Roncholeta,Isaias Santos,Kevin Willians,Maria jaqueline</p>
