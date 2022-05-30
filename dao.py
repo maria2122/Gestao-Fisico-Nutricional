@@ -98,6 +98,7 @@ def traduz_alimentos(alimentos):
 class CardapioDao:
     def __init__(self, db):
         self.__db = db
+
     def salvar(self, cardapio:Cardapio):
         if MECANISMO_BANCO_NOME == 'SQLITE':
             conexao = connect(self.__db)
@@ -113,7 +114,12 @@ class CardapioDao:
             dados_cardapio_insercao = [cardapio.data_inicio, cardapio.data_fim]
             SQL_CRIA_CARDAPIO='INSERT INTO cardapio (data_inicio, data_fim) VALUES (?, ?) '
             cursor.execute(SQL_CRIA_CARDAPIO, dados_cardapio_insercao)
-        self.__db.commit()
+            
+        conexao.commit()
+
+        if MECANISMO_BANCO_NOME == 'SQLITE':
+            conexao.close()
+
         return cardapio
     
     def listar(self):
@@ -127,7 +133,12 @@ class CardapioDao:
         'FROM cardapio '
         cursor.execute(SQL_BUSCA_CARDAPIO)
         cardapios = traduz_cardapio(cursor.fetchall())
+
+        if MECANISMO_BANCO_NOME == 'SQLITE':
+            conexao.close()
+
         return cardapios
+        
 
 def traduz_cardapio(cardapios):
     def cria_cardapio_com_tupla(tupla):
