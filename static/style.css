@@ -10,7 +10,53 @@ header{
     background: #132835;
     padding: 20px;
     width: 100%;
-    height: 30px;
+    height: 90px;
+}
+
+ 
+
+form{
+    
+  
+    margin-top: 100px;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    
+
+}
+ form ,label{
+    display: block;
+    padding: 0px;
+    text-align: right;
+    
+
+}
+
+table{
+    margin-top: 100px;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+}
+
+body{
+        font-family: 'Poppins', sans-serif;
+        grid-template-columns: repeat 
+        
+}
+
+
+.conteudo{
+    background-color: aqua;
+    margin-top: 100px;
+    margin-left: 280px;
+    margin-right:50px ;
+     /*ativa o grid*/
+     display: grid;
+     /*divindo o conteiner em colunas 2 */
+    grid-template-rows: repeat(2);
+    grid
 }
 .left h3{
     color: #fff;
@@ -21,6 +67,18 @@ header{
 }
 .left span{
     color: #51b3ec;
+}
+
+
+.form_login{
+    margin-top: 100px;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+   
+
+    
+    
 }
 /*====BOTAO SAIR====*/
 .sair_btn{
@@ -38,9 +96,11 @@ header{
     color: #fff;
     transition: 0.5s;
     transition-property: background;
+    
 }
 .sair_btn:hover{
     background: #e61414;
+    text-decoration: none;
 }
 /*====BOTAO LOGIN====*/
 .login_btn{
@@ -48,7 +108,6 @@ header{
     width: 80px;
     text-align: center;
     background: #51b3ec;
-    text-decoration: none;
     float: right;
     margin-top: -30px;
     margin-right: 40px;
@@ -61,13 +120,15 @@ header{
 }
 .login_btn:hover{
     background: #4acf6b;
+    text-decoration: none;
 }
 /*====BARRA LATERAL====*/
 .sidebar{
     position: fixed;
+    
     width: 250px;
     height: 100%;
-    margin-top: 70px;
+    margin-top: 90px;
     padding-top: 30px;
     left: 0;
     background: #193446;
@@ -92,7 +153,7 @@ header{
     display: block;
     width: 100%;
     line-height: 60px;
-    text-decoration: none;
+    
     padding-left: 40px;
     box-sizing: border-box;
     transition: 0.5s;
@@ -100,6 +161,7 @@ header{
 }
 .sidebar a:hover{
     background: #51b3ec;
+    text-decoration: none;
 }
 .sidebar ion-icon{
     padding-right: 10px;
@@ -143,3 +205,4 @@ label #sidebar_btn:hover{
 #check{
     display: none;
 }
+

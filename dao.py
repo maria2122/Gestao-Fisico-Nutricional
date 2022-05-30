@@ -80,7 +80,7 @@ class AlimentoDao:
         else:
             cursor = self.__db.cursor()
 
-        SQL_BUSCA_ALIMENTOS = "SELECT id, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo" \
+        SQL_BUSCA_ALIMENTOS = "SELECT id, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo " \
         "FROM alimento" 
         cursor.execute(SQL_BUSCA_ALIMENTOS)
         alimentos =   traduz_alimentos(cursor.fetchall())

@@ -17,6 +17,10 @@ load_banco_de_dados(DB, 'InsereDados')
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
     
 @app.route('/atividadefisica')
 def atividadefisica():
