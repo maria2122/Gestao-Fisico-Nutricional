@@ -69,7 +69,12 @@ class AlimentoDao:
             alimento.valor_proteina, alimento.valor_carboidrato, alimento.ativo]
             SQL_CRIA_ALIMENTO = "INSERT INTO alimento(nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato," \
             " ativo) VALUES (?,?,?,?,?,?,?)"
-        self.__db.commit()
+        
+        conexao.commit()
+        
+        if MECANISMO_BANCO_NOME == 'SQLITE':
+            conexao.close()
+
         return alimento
 
     def listar(self):
