@@ -65,11 +65,10 @@ def alterar_atividadefisica():
 
     return render_template('AtividadeFisica.html', atividadesfisicas=lista)
 
-
 @app.route('/alimento')
 def alimento():
     lista = alimento_dao.listar()
-    return render_template('alimento.html')
+    return render_template('Alimento.html', alimentos=lista)
 
 @app.route('/cria_alimento', methods = ['POST', ])
 def cria_alimento():
@@ -80,31 +79,39 @@ def cria_alimento():
     valor_gordura = request.form['valor_gordura']
     valor_proteina = request.form['valor_proteina']
     valor_carboidrato = request.form['valor_carboidrato']
-    ativo = request.form['ativo']
+    if request.form.get('ativo') == None:
+        ativo = False
+    else:
+        ativo = True
+
     novo_alimento = Alimento(nome, descricao, valor_calorico, valor_gordura, valor_proteina,
     valor_carboidrato, ativo)
 
     alimento_dao.salvar(novo_alimento)
     lista = alimento_dao.listar()
-    return render_template('alimento.html')
+    return render_template('Alimento.html', alimentos=lista)
 
 @app.route('/alterar_alimento', methods=['POST', ])
 def alterar_alimento():
-    id = request.form['id-alteracao']
-    nome = request.form['nome-alteracao']
-    descricao = request.form['descricao-alteracao']
-    valor_calorico = request.form['valor_calorico-alteracao']
-    valor_gordura = request.form['valor_gordura-alteracao']
-    valor_proteina = request.form['valor_proteina-alteracao']
-    valor_carboidrato = request.form['valor_carboidrato-alteracao']
-    ativo = request.form['ativo-alteracao']
+    id = request.form['codido']
+    nome = request.form['nome']
+    descricao = request.form['descricao']
+    valor_calorico = request.form['valor_calorico']
+    valor_gordura = request.form['valor_gordura']
+    valor_proteina = request.form['valor_proteina']
+    valor_carboidrato = request.form['valor_carboidrato']
+    if request.form.get('ativo') == None:
+        ativo = False
+    else:
+        ativo = True
+
     alimento_editado = Alimento(nome=nome, descricao=descricao, valor_calorico=valor_calorico, valor_gordura=valor_gordura, valor_proteina=valor_proteina,
     valor_carboidrato= valor_carboidrato, ativo=ativo, codigo=id)
 
     alimento_dao.salvar(alimento_editado)
     lista = alimento_dao.listar()
 
-    return render_template('alimento.html')
+    return render_template('Alimento.html', alimentos=lista)
 
 @app.route('/cardapio')
 def cardapio():

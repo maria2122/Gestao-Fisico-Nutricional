@@ -70,7 +70,8 @@ class AlimentoDao:
             alimento.valor_proteina, alimento.valor_carboidrato, alimento.ativo]
             SQL_CRIA_ALIMENTO = "INSERT INTO alimento(nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato," \
             " ativo) VALUES (?,?,?,?,?,?,?)"
-        
+            cursor.execute(SQL_CRIA_ALIMENTO, dados_alimento_insercao)
+
         conexao.commit()
         
         if MECANISMO_BANCO_NOME == 'SQLITE':
@@ -89,6 +90,10 @@ class AlimentoDao:
         "FROM alimento" 
         cursor.execute(SQL_BUSCA_ALIMENTOS)
         alimentos =   traduz_alimentos(cursor.fetchall())
+        
+        if MECANISMO_BANCO_NOME == 'SQLITE':
+            conexao.close()
+            
         return alimentos    
 
 def traduz_alimentos(alimentos):
