@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,26 +10,26 @@
     <meta name="author" content="Kevin Willians">
     <meta name="author" content="Maria jaqueline">
     <meta name="Keywords" content="Gestao Fisico Nutricional">
-    <!--Facebook -->  
+    <!--Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Gestao Fisico Nutricional">
     <meta property="og:description" content="Gestao Fisico Nutricional">
     <meta property="og:url" content=>
     <meta property="og:site_name" content="Gestao Fisico Nutricional">
-    <!--Twitter --> 
-    <meta name="twitter:title" content="Gestao Fisico Nutricional"
-    meta name="twitter:description" content="Gestao Fisico Nutricional"
-    meta name="twitter:url" content=>
+    <!--Twitter -->
+    <meta name="twitter:title" content="Gestao Fisico Nutricional" meta name="twitter:description"
+        content="Gestao Fisico Nutricional" meta name="twitter:url" content=>
 
     <title>Gestao Fisico Nutricional</title>
     <link rel="icon" type="imagem/png" href="../static/IMG/IconSite.png" />
-    <link rel="stylesheet" type="text/css" href="../static/style.css" media="screen" /> 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
+    <link rel="stylesheet" type="text/css" href="../static/style.css" media="screen" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 
 <body>
-    
+
     <input type="checkbox" id="check">
     <!--header começo-->
     <header>
@@ -41,7 +42,7 @@
         <div class="right">
             <a href="/login" class="sair_btn">SAIR</a>
             <a href="/login" class="login_btn">LOGIN</a>
-           
+
         </div>
     </header>
     <!--header final-->
@@ -52,38 +53,55 @@
             <h2>Maria</h2>
         </center>
 
-        <a href="#" ><ion-icon name="home-outline"></ion-icon><span>Home</span></a>
-        <a href="/alimento" ><ion-icon name="restaurant-outline"></ion-icon><span>Alimentos</span></a>
-        <a href="/atividadefisica"><ion-icon name="barbell-outline"></ion-icon><span>Atividade Fisica</span></a>
-        <a href="/ficha.html" ><ion-icon name="id-card-outline"></ion-icon><span>Ficha</span></a>
-        <a href="/cardapio" ><ion-icon name="book-outline"></ion-icon><span>Cardapio</span></a>
-        <a href="/contato" ><ion-icon name="chatbubble-ellipses-outline"></ion-icon><span>Contato</span></a>
-        <a href="/ajuda" ><ion-icon name="help-outline"></ion-icon><span>Ajuda</span></a>
+        <a href="#">
+            <ion-icon name="home-outline"></ion-icon><span>Home</span>
+        </a>
+        <a href="/alimento">
+            <ion-icon name="restaurant-outline"></ion-icon><span>Alimentos</span>
+        </a>
+        <a href="/atividadefisica">
+            <ion-icon name="barbell-outline"></ion-icon><span>Atividade Fisica</span>
+        </a>
+        <a href="/ficha.html">
+            <ion-icon name="id-card-outline"></ion-icon><span>Ficha</span>
+        </a>
+        <a href="/cardapio">
+            <ion-icon name="book-outline"></ion-icon><span>Cardapio</span>
+        </a>
+        <a href="/contato">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon><span>Contato</span>
+        </a>
+        <a href="/ajuda">
+            <ion-icon name="help-outline"></ion-icon><span>Ajuda</span>
+        </a>
 
     </div>
     <!--sidebar final-->
     <div class="card-body"></div>
     <!-- Indica local onde o restante da página será carregado para cada
         página que tem como template padrão este arquivo -->
-<div class="conteudo">
-        
-    {% block conteudo %} {%endblock %}
+    <div class="conteudo">
 
-    <footer>
+        {% block conteudo %} {%endblock %}
 
-        <p>@copyright Fortunato Roncholeta,Isaias Santos,Kevin Willians,Maria jaqueline</p>
-        
-    
-       </footer>
-</div>  
+        <footer>
 
-        
-       
-      
-<
-  
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <p>@copyright Fortunato Roncholeta,Isaias Santos,Kevin Willians,Maria jaqueline</p>
+
+
+        </footer>
+    </div>
+
+
+
+
+
+    <script src="../static/js/global.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
