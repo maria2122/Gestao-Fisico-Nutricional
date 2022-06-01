@@ -26,9 +26,9 @@
             <input type="number" name="valor_carboidrato" id="valor_carboidrato">
             </br>
             <label>Ativo</label>
-            <input type="checkbox"  value="1" name="ativo" id="Ativo">
+            <input type="checkbox"  value="1" name="ativo" id="ativo">
             </br>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button  type="submit" class="btn btn-primary">Enviar</button>
         </form>
         <table>
             <thead>
@@ -56,7 +56,7 @@
                     <td>{{alimento.valor_proteina}}</td>
                     <td>{{alimento.valor_carboidrato}}</td>
                     <td>{{alimento.ativo}}</td>
-                    <td><button onclick="preencheForm()" type="submit" class="btn btn-primary">Editar</button></td>
+                    <td><button onclick="carregaDadosDaTabelaParaFormAlimento(this)" type="submit" class="btn btn-primary">Editar</button></td>
                 </tr>
             {% endfor %}
             </tbody>
