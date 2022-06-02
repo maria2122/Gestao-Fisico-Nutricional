@@ -3,7 +3,7 @@ from sqlite3 import connect
 
 
 MECANISMO_BANCO_NOME = 'SQLITE' # Qual mecanismo de banco de dados será utilizado?
-SQL_CRIA_ATIVIDADEFISICA = 'INSERT into atividadefisica (nome, descricao, gasto_calorico, ativo) values (%s,%s,%d,%d)'
+SQL_CRIA_ATIVIDADEFISICA = "INSERT into atividade_fisica (nome, descricao, gasto_calorico, ativo) values (?,?,?,?)"
 SQL_BUSCA_ATIVIDADEFISICA = 'SELECT id, nome, descricao, gasto_calorico, ativo from atividade_fisica'
 SQL_ATUALIZA_ATIVIDADEFISICA = 'UPDATE atividadefisica SET nome=%s, descricao=%s, gasto_calorico=%d, ativo=%d, where codigo=%s'
 SQL_DELETA_ATIVIDADEFISICA = 'delete from atividadefisica where codigo = %s'
@@ -12,7 +12,7 @@ SQL_DELETA_CARDAPIO='DELETE FROM cardapio WHERE id = ? '
 
 class AtividadeFisicaDao:
     def __init__(self, db):
-        self.__db=db
+        self.__db = db
 
     def salvar(self, atividadefisica:AtividadeFisica):
         if MECANISMO_BANCO_NOME == 'SQLITE':
@@ -21,13 +21,17 @@ class AtividadeFisicaDao:
         else:
             cursor = self.__db.cursor()
 
-        if (atividadefisica.__codigo):
+        if (atividadefisica.codigo):
             cursor.execute(SQL_ATUALIZA_ATIVIDADEFISICA, (atividadefisica.nome, atividadefisica.descricao, atividadefisica.gasto_calorico, atividadefisica.ativo, atividadefisica.codigo))
         else:
             cursor.execute(SQL_CRIA_ATIVIDADEFISICA, (atividadefisica.nome, atividadefisica.descricao, atividadefisica.gasto_calorico, atividadefisica.ativo))
-            atividadefisica.__codigo = cursor.lastrowid
+            #atividadefisica.codigo = cursor.lastrowid
 
-        self.__db.commit()
+        conexao.commit()
+        
+        if MECANISMO_BANCO_NOME == 'SQLITE':
+            conexao.close()
+            
         return atividadefisica
 
     def listar(self):
@@ -50,6 +54,7 @@ def traduz_atividadesfisicas(atividadesfisicas):
 class AlimentoDao:
     def __init__(self, db):
         self.__db = db
+
     def salvar(self, alimento:Alimento):
         if MECANISMO_BANCO_NOME == 'SQLITE':
             conexao = connect(self.__db)

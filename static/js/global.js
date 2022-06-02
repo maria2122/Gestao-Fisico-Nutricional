@@ -1,4 +1,4 @@
-//Editar elementos da tabela
+//Funções que carregam os dados da tabela para o formulário
 function carregaDadosDaTabelaParaFormAlimento(td){
     selecaodaLinha = td.parentElement.parentElement;
     document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
@@ -10,9 +10,17 @@ function carregaDadosDaTabelaParaFormAlimento(td){
     document.getElementById("valor_carboidrato").value = selecaodaLinha.cells[6].innerHTML;
     document.getElementById("ativo").value = selecaodaLinha.cells[7].innerHTML;
 }
-function editarCardapio(){
-
+function carregaDadosDaTabelaParaFormCardapio(td){
+    selecaodaLinha = td.parentElement.parentElement;
+    document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
+    document.getElementById("data_inicio").value = selecaodaLinha.cells[1].innerHTML;
+    document.getElementById("data_fim").value = selecaodaLinha.cells[2].innerHTML;
 }
-function editarAtividadeFisica(){
-
+function carregaDadosDaTabelaParaFormAtividadeFisica(td){
+    selecaodaLinha = td.parentElement.parentElement;
+    document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
+    document.getElementById("nome").value = selecaodaLinha.cells[1].innerHTML;
+    document.getElementById("descricao").value = selecaodaLinha.cells[2].innerHTML;
+    document.getElementById("gasto_calorico").value = selecaodaLinha.cells[3].innerHTML;
+    document.getElementById("ativo").value = selecaodaLinha.cells[4].innerHTML;
 }
