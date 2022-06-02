@@ -32,32 +32,32 @@ def atividadefisica():
 
 @app.route('/criar_atividadefisica', methods = ['POST', ])
 def criar_atividadefisica():
-    
-    codigo          = request.form['codigo']
     nome            = request.form['nome']
     descricao       = request.form['descricao']
     gasto_calorico  = request.form['gasto_calorico']
     ativo           = request.form['ativo']
-
-    novo_atividadefisica = AtividadeFisica(codigo='', nome=nome, descricao=descricao, gasto_calorico=gasto_calorico, ativo=ativo)
-
+    if request.form.get('ativo') == None:
+        ativo = False
+    else:
+        ativo = True
+    novo_atividadefisica = AtividadeFisica(nome=nome, descricao=descricao, gasto_calorico=gasto_calorico, ativo=ativo)
     atividadefisica_dao.salvar(novo_atividadefisica)
     lista = atividadefisica_dao.listar()
     return render_template('AtividadeFisica.html', atividadesfisicas=lista)
 
-app.route('/alterar_atividadefisica', methods=['POST', ])
+@app.route('/alterar_atividadefisica', methods=['POST', ])
 def alterar_atividadefisica():
     codigo          = request.form['codigo-alteracao']
     nome            = request.form['nome-alteracao']
     descricao       = request.form['descricao-alteracao']
     gasto_calorico  = request.form['gasto_calorico-alteracao']
     ativo           = request.form['ativo-alteracao']
-    if request.form.get('atividadefisica-alteracao') == None:
-        atividadefisica = False
+    if request.form.get('ativo') == None:
+        ativo = False
     else:
-        atividadefisica = True
+        ativo = True
 
-    atividadefisica_editada = AtividadeFisica(codigo=id, nome=nome, descricao=descricao,
+    atividadefisica_editada = AtividadeFisica(codigo=codigo, nome=nome, descricao=descricao,
                                               gasto_calorico=gasto_calorico, ativo=ativo)
 
     atividadefisica_dao.salvar(atividadefisica_editada)
