@@ -1,6 +1,17 @@
 //Funções que carregam os dados da tabela para o formulário
 function carregaDadosDaTabelaParaFormAlimento(td){
-    selecaodaLinha = td.parentElement.parentElement;
+    //muda value do botão
+    document.getElementById("btnAlimento").value = "Alterar";
+    //muda o action do formulário para alterar_alimento
+    document.getElementById("formAlimento").action = "/alterar_alimento";
+    //armazena linhas da tabela em uma variável
+    const selecaodaLinha = td.parentElement.parentElement;
+    
+    //Cria um novo label e input para po campo Código e dispõe eles no topo do formulário
+    $("#formAlimento").prepend( "<input type='text' name='codigo' id='codigo' readonly='true'/></br>");
+    $("#formAlimento").prepend( "<label id='label'>Código</label>");
+        
+    //Carrega o conteudo da linha  da tabela para o formulário.
     document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
     document.getElementById("nome").value = selecaodaLinha.cells[1].innerHTML;
     document.getElementById("descricao").value = selecaodaLinha.cells[2].innerHTML;
@@ -8,19 +19,23 @@ function carregaDadosDaTabelaParaFormAlimento(td){
     document.getElementById("valor_gordura").value = selecaodaLinha.cells[4].innerHTML;
     document.getElementById("valor_proteina").value = selecaodaLinha.cells[5].innerHTML;
     document.getElementById("valor_carboidrato").value = selecaodaLinha.cells[6].innerHTML;
-    document.getElementById("ativo").value = selecaodaLinha.cells[7].innerHTML;
+    document.getElementById("ativo").value = selecaodaLinha.cells[7].innerHTML; 
 }
 function carregaDadosDaTabelaParaFormCardapio(td){
-    selecaodaLinha = td.parentElement.parentElement;
+    document.getElementById("formCardapio").action = "/alterar_cardapio";
+    const selecaodaLinha = td.parentElement.parentElement;
     document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
     document.getElementById("data_inicio").value = selecaodaLinha.cells[1].innerHTML;
     document.getElementById("data_fim").value = selecaodaLinha.cells[2].innerHTML;
 }
 function carregaDadosDaTabelaParaFormAtividadeFisica(td){
-    selecaodaLinha = td.parentElement.parentElement;
+    document.getElementById("formAtividadeFisica").action = "/alterar_atividade_fisica";
+    const selecaodaLinha = td.parentElement.parentElement;
     document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
     document.getElementById("nome").value = selecaodaLinha.cells[1].innerHTML;
     document.getElementById("descricao").value = selecaodaLinha.cells[2].innerHTML;
     document.getElementById("gasto_calorico").value = selecaodaLinha.cells[3].innerHTML;
     document.getElementById("ativo").value = selecaodaLinha.cells[4].innerHTML;
 }
+
+

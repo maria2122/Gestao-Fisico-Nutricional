@@ -3,10 +3,7 @@
 
     <div>
         <h1>Alimento</h1>
-        <form  id="form-editar-alimento" action="/alterar_alimento" method="post">
-            <label>Código</label>
-            <input type="readonly" name="codigo" id="codigo">
-            </br>
+        <form class="col" id="formAlimento" action="/criar_alimento" method="post">
             <label>Nome</label>
             <input type="text" name="nome" id="nome">
             </br>
@@ -28,7 +25,7 @@
             <label>Ativo</label>
             <input type="checkbox"  value="1" name="ativo" id="ativo">
             </br>
-            <button  type="submit" class="btn btn-primary">Enviar</button>
+            <input id="btnAlimento" type="submit" class="btn btn-primary" value="Enviar">
         </form>
         <table>
             <thead>
