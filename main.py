@@ -93,7 +93,7 @@ def cria_alimento():
 
 @app.route('/alterar_alimento', methods=['POST', ])
 def alterar_alimento():
-    id = request.form['codido']
+    codigo = request.form['codigo']
     nome = request.form['nome']
     descricao = request.form['descricao']
     valor_calorico = request.form['valor_calorico']
@@ -106,7 +106,7 @@ def alterar_alimento():
         ativo = True
 
     alimento_editado = Alimento(nome=nome, descricao=descricao, valor_calorico=valor_calorico, valor_gordura=valor_gordura, valor_proteina=valor_proteina,
-    valor_carboidrato= valor_carboidrato, ativo=ativo, codigo=id)
+    valor_carboidrato= valor_carboidrato, ativo=ativo, codigo=codigo)
 
     alimento_dao.salvar(alimento_editado)
     lista = alimento_dao.listar()
