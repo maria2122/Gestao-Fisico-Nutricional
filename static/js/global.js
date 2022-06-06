@@ -6,11 +6,10 @@ function carregaDadosDaTabelaParaFormAlimento(td){
     document.getElementById("formAlimento").action = "/alterar_alimento";
     //armazena linhas da tabela em uma variável
     const selecaodaLinha = td.parentElement.parentElement;
-    
-    //Cria um novo label e input para po campo Código e dispõe eles no topo do formulário
-    $("#formAlimento").prepend( "<input type='text' name='codigo' id='codigo' readonly='true'/></br>");
-    $("#formAlimento").prepend( "<label id='label'>Código</label>");
-        
+    // Torna o campo código visível
+    document.getElementById("label").hidden = false;  
+    document.getElementById("codigo").hidden = false;
+      
     //Carrega o conteudo da linha  da tabela para o formulário.
     document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
     document.getElementById("nome").value = selecaodaLinha.cells[1].innerHTML;
@@ -19,7 +18,7 @@ function carregaDadosDaTabelaParaFormAlimento(td){
     document.getElementById("valor_gordura").value = selecaodaLinha.cells[4].innerHTML;
     document.getElementById("valor_proteina").value = selecaodaLinha.cells[5].innerHTML;
     document.getElementById("valor_carboidrato").value = selecaodaLinha.cells[6].innerHTML;
-    document.getElementById("ativo").value = selecaodaLinha.cells[7].innerHTML; 
+    document.getElementById("ativo").setAttribute('checked', 'true');
 }
 function carregaDadosDaTabelaParaFormCardapio(td){
     document.getElementById("formCardapio").action = "/alterar_cardapio";
