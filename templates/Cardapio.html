@@ -1,18 +1,18 @@
 {%extends "Template.html"%}
     {%block conteudo %}
-    <center>
-    <form action="/cria_cardapio" method="POST">
-        <label>Código</label>
-        <input type="number" name="id" id="id" readonly>
-        <br>
+    <h1>Cardápio</h1>
+    <form id="formCardapio" action="/cria_cardapio" method="POST">
+        <label id='label' hidden>Código</label>
+        <input type='text' name='codigo' id='codigo' readonly='true' hidden/>
+        </br> 
         <label>Data Inicio</label>
         <input type="date" name="data_inicio" id="data_inicio">
         <br>
         <label>Data Fim</label>
         <input type="date" name="data_fim" id="data_fim">
         <br>
-        <input type="submit" name="submit" id="enviar"> 
-     </form>
+        <input id="btnCardapio" type="submit" class="btn btn-primary" value="Enviar">
+    </form>
 
      <table>
         <thead>
@@ -27,9 +27,9 @@
                 <td>{{cardapio.codigo}}</td>
                 <td>{{cardapio.data_inicio}}</td>
                 <td>{{cardapio.data_fim}}</td>
+                <td><button onclick="carregaDadosDaTabelaParaFormCardapio(this)" type="submit" class="btn btn-primary">Editar</button></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    </center>
 {%endblock %}

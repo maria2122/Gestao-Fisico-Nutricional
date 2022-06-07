@@ -104,13 +104,6 @@ class AtividadeFisica:
         self.__gasto_calorico = gasto_calorico
 
     @property
-    def tipo(self):
-        return self.__tipo
-    @tipo.setter
-    def tipo(self, tipo):
-        self.__tipo = tipo
-
-    @property
     def ativo(self):
         return self.__ativo
     @ativo.setter

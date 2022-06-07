@@ -5,8 +5,8 @@ from sqlite3 import connect
 MECANISMO_BANCO_NOME = 'SQLITE' # Qual mecanismo de banco de dados será utilizado?
 SQL_CRIA_ATIVIDADEFISICA = "INSERT into atividade_fisica (nome, descricao, gasto_calorico, ativo) values (?,?,?,?)"
 SQL_BUSCA_ATIVIDADEFISICA = 'SELECT id, nome, descricao, gasto_calorico, ativo from atividade_fisica'
-SQL_ATUALIZA_ATIVIDADEFISICA = 'UPDATE atividadefisica SET nome=%s, descricao=%s, gasto_calorico=%d, ativo=%d, where codigo=%s'
-SQL_DELETA_ATIVIDADEFISICA = 'delete from atividadefisica where codigo = %s'
+SQL_ATUALIZA_ATIVIDADEFISICA = 'UPDATE atividade_fisica SET nome=?, descricao=?, gasto_calorico=?, ativo=? where id=?'
+SQL_DELETA_ATIVIDADEFISICA = 'delete from atividadefisica where codigo = ?'
 
 SQL_DELETA_CARDAPIO='DELETE FROM cardapio WHERE id = ? '
 
@@ -122,7 +122,7 @@ class CardapioDao:
             cursor = self.__db.cursor()
 
         if(cardapio.codigo):
-            dados_cardapio_atualizacao = [cardapio.data_inicio, cardapio.data_fim]
+            dados_cardapio_atualizacao = [cardapio.data_inicio, cardapio.data_fim, cardapio.codigo]
             SQL_ATUALIZA_CARDAPIO='UPDATE cardapio SET data_inicio = ?, data_fim = ? WHERE id = ? '
             cursor.execute(SQL_ATUALIZA_CARDAPIO, dados_cardapio_atualizacao)
         else:

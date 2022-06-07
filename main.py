@@ -47,18 +47,17 @@ def criar_atividadefisica():
 
 @app.route('/alterar_atividadefisica', methods=['POST', ])
 def alterar_atividadefisica():
-    codigo          = request.form['codigo-alteracao']
-    nome            = request.form['nome-alteracao']
-    descricao       = request.form['descricao-alteracao']
-    gasto_calorico  = request.form['gasto_calorico-alteracao']
-    ativo           = request.form['ativo-alteracao']
+    codigo          = request.form['codigo']
+    nome            = request.form['nome']
+    descricao       = request.form['descricao']
+    gasto_calorico  = request.form['gasto_calorico']
     if request.form.get('ativo') == None:
         ativo = False
     else:
         ativo = True
 
-    atividadefisica_editada = AtividadeFisica(codigo=codigo, nome=nome, descricao=descricao,
-                                              gasto_calorico=gasto_calorico, ativo=ativo)
+    atividadefisica_editada = AtividadeFisica(nome=nome, descricao=descricao,
+                                              gasto_calorico=gasto_calorico, ativo=ativo, codigo=codigo)
 
     atividadefisica_dao.salvar(atividadefisica_editada)
     lista = atividadefisica_dao.listar()
@@ -130,10 +129,10 @@ def cria_cardapio():
 
 @app.route('/alterar_cardapio', methods=['POST', ])
 def alterar_cardapio():
-    id = request.form['id-alteracao']
+    codigo = request.form['codigo']
     data_inicio = request.form['data_inicio']
     data_fim = request.form['data_fim']
-    cardapio_atualizado = Cardapio(data_inicio=data_inicio, data_fim=data_fim, codigo=id)
+    cardapio_atualizado = Cardapio(data_inicio=data_inicio, data_fim=data_fim, codigo=codigo)
     cardapio_dao.salvar(cardapio_atualizado)
     lista = cardapio_dao.listar()
 

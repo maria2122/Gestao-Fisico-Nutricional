@@ -1,48 +1,47 @@
 {%extends "Template.html"%}
 {%block conteudo %}
-    <form action="/criar_atividadefisica" method="post">
-        <label>Nome</label>
-        <input type="text" name="nome" id="nome">
-        <br>
-        <label>Descrição</label>
-        <input type="text" name="descricao" id="descricao">
-        <br>
-        <label>Gasto Calorico</label>
-        <input type="number" name="gasto_calorico" id="gasto_calorico">
-        <br>
-        <label>Ativo</label>
-        <input type="checkbox"  value="1" name="ativo" id="ativo">
-        <br>
-
-        <button type="submit" class="btn btn-outline-success" name="submit" id="enviar">Enviar </button>
-   
-   
-
-     </form>
-
-     <table>
-        <thead>
-            <tr>
-                <th>codigo</th>
-                <th>nome</th>
-                <th>descricao</th>
-                <th>gasto_calorico</th>
-                <th>ativo</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for atividadefisica in atividadesfisicas %}
-            <tr>
-                <td>{{atividadefisica.codigo}}</td>
-                <td>{{atividadefisica.nome}}</td>
-                <td>{{atividadefisica.descricao}}</td>
-                <td>{{atividadefisica.gasto_calorico}}</td>
-                <td>{{atividadefisica.ativo}}</td>
-                <td>
-                    <a href="/atividadefisica/{{atividadefisica.codigo}}">Editar</a>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+    <div>
+        <h1>Atividade Física</h1>
+        <form id="formAtividadeFisica" action="/criar_atividadefisica" method="post">
+            <label id='label' hidden>Código</label>
+            <input type='text' name='codigo' id='codigo' readonly='true' hidden/>
+            </br>
+            <label>Nome</label>
+            <input type="text" name="nome" id="nome">
+            <br>
+            <label>Descrição</label>
+            <input type="text" name="descricao" id="descricao">
+            <br>
+            <label>Gasto Calorico</label>
+            <input type="number" name="gasto_calorico" id="gasto_calorico">
+            <br>
+            <label>Ativo</label>
+            <input type="checkbox"  value="1" name="ativo" id="ativo">
+            <br>
+            <input id="btnAtividadeFisica" type="submit" class="btn btn-primary" value="Enviar"> 
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Gasto Calórico</th>
+                    <th>Ativo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for atividadefisica in atividadesfisicas %}
+                <tr>
+                    <td>{{atividadefisica.codigo}}</td>
+                    <td>{{atividadefisica.nome}}</td>
+                    <td>{{atividadefisica.descricao}}</td>
+                    <td>{{atividadefisica.gasto_calorico}}</td>
+                    <td>{{atividadefisica.ativo}}</td>
+                    <td><button onclick="carregaDadosDaTabelaParaFormAtividadeFisica(this)" type="submit" class="btn btn-primary">Editar</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <div>
 {%endblock %}
