@@ -1,0 +1,34 @@
+{%extends "Template.html"%}
+{%block conteudo %}
+    <div>
+        <h1>Cadastro usuario</h1>
+        <form id="formCadastroUser " action="/cadastrar_User" method="post">
+            <label id='label' hidden>Código</label>
+            <input type='text' name='codigo' id='codigo' readonly='true' hidden/>
+            </br>
+            <label>Nome</label>
+            <input type="text" name="nome" id="nome">
+            <br>
+            <label>Login</label>
+            <input type="text" name="login" id="login">
+            <br>
+            <label>Senha</label>
+            <input type="number" name="senha" id="senha">
+            <br>
+            <label>Cliente</label>
+            <input type="checkbox"  value="1" name="Cliente_box" id="ativo">
+            <br>
+            <label>Profissional Físico</label>
+            <input type="checkbox"  value="1" name="Fisico_box" id="ativo">
+            <br>
+            <label>Profissional da Saúde</label>
+            <input type="checkbox"  value="1" name="saude_box" id="ativo">
+            <br>
+            <label>Administrador</label>
+            <input type="checkbox"  value="1" name="Adm_box" id="ativo">
+            <br>
+            <input id="btnCadastrarUser" type="submit" class="btn btn-primary" value="Enviar"> 
+        </form>
+       
+    <div>
+{%endblock %}
