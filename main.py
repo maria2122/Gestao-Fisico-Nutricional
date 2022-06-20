@@ -14,14 +14,23 @@ cardapio_dao = CardapioDao(DB)
 load_banco_de_dados(DB, 'CriaBD')
 load_banco_de_dados(DB, 'InsereDados')
 
+user =None
 @app.route('/')
 def index():
     return render_template('index.html')
 
+@app.route('/ADM')
+def ADM():
+    return render_template('ADM.html')
+    
 @app.route('/login')
 def login():
     return render_template('login.html')
-    
+
+@app.route('/Cadastro_user')
+def Cadastro_user():
+    return render_template('Cadastro_user.html')
+
 @app.route('/atividadefisica')
 def atividadefisica():
     lista = atividadefisica_dao.listar()

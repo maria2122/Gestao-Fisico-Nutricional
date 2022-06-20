@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS cardapio;
 DROP TABLE IF EXISTS alimento_cardapio;
 DROP TABLE IF EXISTS atividade_fisica;
 
-CREATE TABLE "alimento" (
+CREATE TABLE IF NOT EXISTS "alimento" (
   "id" INTEGER,
   "nome" TEXT NOT NULL,
   "descricao" TEXT NOT NULL,
@@ -15,14 +15,14 @@ CREATE TABLE "alimento" (
   PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-CREATE TABLE "cardapio" (
+CREATE TABLE IF NOT EXISTS "cardapio" (
   "id" INTEGER,
   "data_inicio" TEXT NOT NULL,
   "data_fim" TEXT NOT NULL,
   PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-CREATE TABLE "alimento_cardapio" (
+CREATE TABLE IF NOT EXISTS "alimento_cardapio" (
   "id" INTEGER,
   "alimento_id" INTEGER NOT NULL,
   "cardapio_id" INTEGER NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE "alimento_cardapio" (
   PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-CREATE TABLE "atividade_fisica" (
+CREATE TABLE IF NOT EXISTS "atividade_fisica" (
   "id" INTEGER,
   "nome" TEXT NOT NULL,
   "descricao" TEXT NOT NULL,

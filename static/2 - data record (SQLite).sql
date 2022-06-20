@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 -- Alimento --------------------------------------------------------------------
 --------------------------------------------------------------------------------
+DELETE FROM alimento;
 INSERT INTO alimento(id, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo) 
 VALUES (1,"Café com açúcar 50ml","Café com açúcar 50ml",33,0,0,0,1);
 
@@ -22,12 +23,14 @@ VALUES (6, "Filé-mignon 100g","Filé-mignon 100g",140,0,0,0,1);
 --------------------------------------------------------------------------------
 -- Cardapio --------------------------------------------------------------------
 --------------------------------------------------------------------------------
+DELETE FROM cardapio;
 INSERT INTO cardapio(id, data_inicio, data_fim) 
 VALUES (1,"2022-03-21","2022-04-30");
 
 -----------------------------------------------------------------------
 -- Alimento_Cardapio --------------------------------------------------
 -----------------------------------------------------------------------
+DELETE FROM alimento_cardapio;
 -- Café com açúcar 50ml
 INSERT INTO alimento_cardapio(id, alimento_id, cardapio_id, quantidade) 
 VALUES (1,1,1,3);
@@ -55,6 +58,7 @@ VALUES (6,6,1,5);
 --------------------------------------------------------------------------
 -- Atividade_Fisica ------------------------------------------------------
 --------------------------------------------------------------------------
+DELETE FROM atividade_fisica;
 INSERT INTO atividade_fisica(id, nome, descricao, gasto_calorico, ativo) 
 VALUES (1,"Caminhada devagar 1Hr","Caminhada devagar por uma hora", 240, 1);
 
