@@ -1,5 +1,14 @@
 from ast import Return
 
+class Usuario:
+    def __init__(self, nome, login, senha, cliente, profissional_ed_fisica, nutricional, administrador, codigo=None):
+        #Atributos Privados
+        self.__codigo = codigo
+        self.__nome = nome
+        self.__login= login
+        self.__senha=senha
+        self.__cliente=cliente
+        self.
 
 class Alimento:
     def __init__(self, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None):
@@ -138,4 +147,38 @@ class Cardapio:
     def data_fim(self, data_fim):
         self.__data_fim=data_fim
     
+class FichaAtividade:
+    def __init__(self, data_inicio, data_fim,usuario, codigo=None):
+        # Atributos Privados
+        self.__codigo=codigo
+        self.__data_inicio=data_inicio
+        self.__data_fim=data_fim
+        self.__usuario=usuario
 
+        # O atributo código apenas obtê-lo não alterá-lo
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    # Properts e Setters
+    # data_inicio
+    @property
+    def data_inicio(self):
+        return self.__data_inicio
+    @data_inicio.setter
+    def data_inicio(self, data_inicio):
+        self.__data_inicio=data_inicio
+    # data_fim
+    @property
+    def data_fim(self):
+        return self.__data_fim
+    @data_fim.setter
+    def data_fim(self, data_fim):
+        self.__data_fim=data_fim
+    # usuario
+    @property
+    def usuario(self):
+        return self.__usuario
+    @usuario.setter
+    def usuario(self, usuario):
+        self.__usuario=usuario
