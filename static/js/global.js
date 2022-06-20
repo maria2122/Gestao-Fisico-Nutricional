@@ -20,8 +20,9 @@ function carregaDadosDaTabelaParaFormAlimento(td){
     document.getElementById("valor_gordura").value = selecaodaLinha.cells[4].innerHTML;
     document.getElementById("valor_proteina").value = selecaodaLinha.cells[5].innerHTML;
     document.getElementById("valor_carboidrato").value = selecaodaLinha.cells[6].innerHTML;
-    document.getElementById("ativo").setAttribute('checked', 'true');
-    document.getElementById("ativo").value=selecaodaLinha.cells[7].innerHTML;
+    document.getElementById("ativo").value = selecaodaLinha.cells[7].innerHTML;
+    
+    
 }
 function carregaDadosDaTabelaParaFormCardapio(td){
     //muda value do botão
