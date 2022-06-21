@@ -17,7 +17,7 @@ class Usuario:
         return self.__codigo
 
     # Properts e Setters 
-    
+    def nome
 
 class Alimento:
     def __init__(self, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None):
