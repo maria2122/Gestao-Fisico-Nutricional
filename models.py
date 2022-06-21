@@ -1,6 +1,5 @@
 from ast import Return
 
-
 class Alimento:
     def __init__(self, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None):
         #Atributos Privados
@@ -137,5 +136,109 @@ class Cardapio:
     @data_fim.setter
     def data_fim(self, data_fim):
         self.__data_fim=data_fim
-    
+class Usuario:
+    def __init__(self, nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador, codigo=None):
+        #Atributos Privados
+        self.__codigo = codigo
+        self.__nome = nome
+        self.__login= login
+        self.__senha=senha
+        self.__cliente=cliente
+        self.__profissional_ed_fisica=profissional_ed_fisica
+        self.__nutricionista=nutricionista
+        self.__admninstrador=administrador
 
+    
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    # Properts e Setters
+    
+    #nome
+    @property 
+    def nome(self):
+        return self.__nome
+    @nome.setter
+    def nome(self, nome):
+        self.__nome = nome
+    #login
+    @property
+    def login(self):
+        return self.__login
+    @login.setter
+    def login(self, login):
+        self.__login = login
+    #senha
+    @property
+    def senha(self):
+        return self.__senha
+    @senha.setter
+    def senha(self, senha):
+        self.__senha = senha
+    #cliente
+    @property
+    def cliente(self):
+        return self.__cliente
+    @cliente.setter
+    def cliente(self, cliente):
+        self.__cliente = cliente
+    #profissional_ed_fisica
+    @property
+    def profissional_ed_fisica(self):
+        return self.__profissional_ed_fisica
+    @profissional_ed_fisica.setter
+    def profissional_ed_fisica(self, profissional_ed_fisica):
+        self.__profissional_ed_fisica = profissional_ed_fisica
+    #nutricionista
+    @property
+    def nutricionista(self):
+        return self.__nutricionista
+    @nutricionista.setter
+    def nutricionista(self, nutricionista):
+        self.__nutricionista = nutricionista
+    #administrador
+    @property
+    def administrador(self):
+        return self.__administrador
+    @administrador.setter
+    def administrador(self, administrador):
+        self.__administrador = administrador
+
+class FichaAtividadeFisica:
+    def __init__(self, data_inicio, data_fim,usuario:Usuario, codigo=None):
+        # Atributos Privados
+        self.__codigo=codigo
+        self.__data_inicio=data_inicio
+        self.__data_fim=data_fim
+        self.__usuario=usuario
+
+    # O atributo código apenas obtê-lo não alterá-lo
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    # Properts e Setters
+    # data_inicio
+    @property
+    def data_inicio(self):
+        return self.__data_inicio
+    @data_inicio.setter
+    def data_inicio(self, data_inicio):
+        self.__data_inicio=data_inicio
+    # data_fim
+    @property
+    def data_fim(self):
+        return self.__data_fim
+    @data_fim.setter
+    def data_fim(self, data_fim):
+        self.__data_fim=data_fim
+    # usuario
+    @property
+    def usuario(self):
+        return self.__usuario
+    @usuario.setter
+    def usuario(self, usuario):
+        self.__usuario=usuario
+
+    
