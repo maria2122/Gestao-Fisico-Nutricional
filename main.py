@@ -1,5 +1,6 @@
-from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, load_banco_de_dados
-from models import AtividadeFisica, Alimento, Cardapio
+from re import A
+from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao, load_banco_de_dados
+from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica
 from flask import Flask, render_template, request, session, redirect
 
 
@@ -10,7 +11,7 @@ DB = "dbgestaofisiconutricional.db"
 atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
 cardapio_dao = CardapioDao(DB)
-
+ficha_atividade_fisica_dao = FichaAtividadeFisicaDao(DB)
 load_banco_de_dados(DB, 'CriaBD')
 load_banco_de_dados(DB, 'InsereDados')
 
@@ -146,6 +147,16 @@ def alterar_cardapio():
     lista = cardapio_dao.listar()
 
     return render_template('Cardapio.html', cardapios=lista)
+
+@app.route('/ficha_atividade_fisica')
+def ficha_atividade_fisica():
+    #lista = ficha_atividade_fisica_dao.listar()
+    return render_template('FichaAtividadeFisica.html')
+
+@app.route('/usuario')
+def usuario():
+    return render_template('Usuario.html')
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
