@@ -1,14 +1,23 @@
 from ast import Return
 
 class Usuario:
-    def __init__(self, nome, login, senha, cliente, profissional_ed_fisica, nutricional, administrador, codigo=None):
+    def __init__(self, nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador, codigo=None):
         #Atributos Privados
         self.__codigo = codigo
         self.__nome = nome
         self.__login= login
         self.__senha=senha
         self.__cliente=cliente
-        self.
+        self.__profissional_ed_fisica=profissional_ed_fisica
+        self.__nutricionista=nutricionista
+        self.__admninstrador=administrador
+    
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    # Properts e Setters 
+    
 
 class Alimento:
     def __init__(self, nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None):
@@ -155,7 +164,7 @@ class FichaAtividade:
         self.__data_fim=data_fim
         self.__usuario=usuario
 
-        # O atributo código apenas obtê-lo não alterá-lo
+    # O atributo código apenas obtê-lo não alterá-lo
     @property
     def codigo(self):
         return self.__codigo
