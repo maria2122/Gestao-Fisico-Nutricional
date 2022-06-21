@@ -1,6 +1,6 @@
 from re import A
-from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao, load_banco_de_dados
-from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica
+from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao,UsuarioDao, load_banco_de_dados
+from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica,Usuario
 from flask import Flask, render_template, request, session, redirect
 
 
@@ -12,6 +12,7 @@ atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
 cardapio_dao = CardapioDao(DB)
 ficha_atividade_fisica_dao = FichaAtividadeFisicaDao(DB)
+usuario_dao = U
 load_banco_de_dados(DB, 'CriaBD')
 load_banco_de_dados(DB, 'InsereDados')
 
@@ -148,14 +149,38 @@ def alterar_cardapio():
 
     return render_template('Cardapio.html', cardapios=lista)
 
+
 @app.route('/ficha_atividade_fisica')
-def ficha_atividade_fisica():
-    #lista = ficha_atividade_fisica_dao.listar()
-    return render_template('FichaAtividadeFisica.html')
+def cria_ficha_atividade_fisica():
+    lista = ficha_atividade_fisica_dao.listar()
+    return render_template('FichaAtividadeFisica.html', ficha_atividade_fisicas=lista)
+
+@app.route('/cria_ficha_atividade_fisica', methods = ['POST', ])
+def cria_ficha_atividade_fisica():
+    data_inicio = request.form['data_inicio']
+    data_fim = request.form['data_fim']
+    nova_ficha_atividade = FichaAtividadeFisica(data_inicio=data_inicio, data_fim=data_fim)
+
+    ficha_atividade_fisica_dao.salvar(nova_ficha_atividade)
+    lista = ficha_atividade_fisica_dao.listar()
+    return render_template('FichaAtividadeFisica.html', ficha_atividade_fisicas=lista)
+
+@app.route('/alterar_ficha_atividade_fisica', methods=['POST', ])
+def alterar_ficha_atividade_fisica():
+    codigo = request.form['codigo']
+    data_inicio = request.form['data_inicio']
+    data_fim = request.form['data_fim']
+    ficha_atividade_fisica_atualizada = FichaAtividadeFisica(data_inicio=data_inicio, data_fim=data_fim, codigo=codigo)
+    ficha_atividade_fisica_dao.salvar(ficha_atividade_fisica_atualizada)
+    lista = ficha_atividade_fisica_dao.listar()
+
+    return render_template('FichaAtividadeFisica.html', ficha_atividade_fisicas=lista)
+
 
 @app.route('/usuario')
 def usuario():
-    return render_template('Usuario.html')
+    lista = usuario_dao.listar()
+    return render_template('Usuario.html',usuarios=lista)
     
 
 if __name__ == '__main__':
