@@ -5,63 +5,63 @@ from flask import Flask, render_template, request, session, redirect
 
 
 app = Flask(__name__)
-app.secret_key = 'teste'
+app.secret_key = "teste"
 
 DB = "dbgestaofisiconutricional.db"
 atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
 cardapio_dao = CardapioDao(DB)
 ficha_atividade_fisica_dao = FichaAtividadeFisicaDao(DB)
-load_banco_de_dados(DB, 'CriaBD')
-load_banco_de_dados(DB, 'InsereDados')
+load_banco_de_dados(DB, "CriaBD")
+load_banco_de_dados(DB, "InsereDados")
 
 user =None
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/ADM')
+@app.route("/ADM")
 def ADM():
-    return render_template('ADM.html')
+    return render_template("ADM.html")
     
-@app.route('/login')
+@app.route("/login")
 def login():
-    return render_template('login.html')
+    return render_template("login.html")
 
-@app.route('/Cadastro_user')
+@app.route("/Cadastro_user")
 def Cadastro_user():
-    return render_template('Cadastro_user.html')
+    return render_template("Cadastro_user.html")
 
-@app.route('/atividadefisica')
+@app.route("/atividadefisica")
 def atividadefisica():
     lista = atividadefisica_dao.listar()
-    # if 'usuario_logado' not in session or session['usuario_logado'] == None:
-    #     return redirect('/login?proxima=')
+    # if "usuario_logado" not in session or session["usuario_logado"] == None:
+    #     return redirect("/login?proxima=")
     # else:
-    return render_template('AtividadeFisica.html', atividadesfisicas=lista)
+    return render_template("AtividadeFisica.html", atividadesfisicas=lista)
 
-@app.route('/criar_atividadefisica', methods = ['POST', ])
+@app.route("/criar_atividadefisica", methods = ["POST", ])
 def criar_atividadefisica():
-    nome            = request.form['nome']
-    descricao       = request.form['descricao']
-    gasto_calorico  = request.form['gasto_calorico']
-    ativo           = request.form['ativo']
-    if request.form.get('ativo') == None:
+    nome            = request.form["nome"]
+    descricao       = request.form["descricao"]
+    gasto_calorico  = request.form["gasto_calorico"]
+    ativo           = request.form["ativo"]
+    if request.form.get("ativo") == None:
         ativo = False
     else:
         ativo = True
     novo_atividadefisica = AtividadeFisica(nome=nome, descricao=descricao, gasto_calorico=gasto_calorico, ativo=ativo)
     atividadefisica_dao.salvar(novo_atividadefisica)
     lista = atividadefisica_dao.listar()
-    return render_template('AtividadeFisica.html', atividadesfisicas=lista)
+    return render_template("AtividadeFisica.html", atividadesfisicas=lista)
 
-@app.route('/alterar_atividadefisica', methods=['POST', ])
+@app.route("/alterar_atividadefisica", methods=["POST", ])
 def alterar_atividadefisica():
-    codigo          = request.form['codigo']
-    nome            = request.form['nome']
-    descricao       = request.form['descricao']
-    gasto_calorico  = request.form['gasto_calorico']
-    if request.form.get('ativo') == None:
+    codigo          = request.form["codigo"]
+    nome            = request.form["nome"]
+    descricao       = request.form["descricao"]
+    gasto_calorico  = request.form["gasto_calorico"]
+    if request.form.get("ativo") == None:
         ativo = False
     else:
         ativo = True
@@ -72,23 +72,23 @@ def alterar_atividadefisica():
     atividadefisica_dao.salvar(atividadefisica_editada)
     lista = atividadefisica_dao.listar()
 
-    return render_template('AtividadeFisica.html', atividadesfisicas=lista)
+    return render_template("AtividadeFisica.html", atividadesfisicas=lista)
 
-@app.route('/alimento')
+@app.route("/alimento")
 def alimento():
     lista = alimento_dao.listar()
-    return render_template('Alimento.html', alimentos=lista)
+    return render_template("Alimento.html", alimentos=lista)
 
-@app.route('/cria_alimento', methods = ['POST', ])
+@app.route("/cria_alimento", methods = ["POST", ])
 def cria_alimento():
 #nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None)
-    nome = request.form['nome']
-    descricao = request.form['descricao']
-    valor_calorico = request.form['valor_calorico']
-    valor_gordura = request.form['valor_gordura']
-    valor_proteina = request.form['valor_proteina']
-    valor_carboidrato = request.form['valor_carboidrato']
-    if request.form.get('ativo') == None:
+    nome = request.form["nome"]
+    descricao = request.form["descricao"]
+    valor_calorico = request.form["valor_calorico"]
+    valor_gordura = request.form["valor_gordura"]
+    valor_proteina = request.form["valor_proteina"]
+    valor_carboidrato = request.form["valor_carboidrato"]
+    if request.form.get("ativo") == None:
         ativo = False
     else:
         ativo = True
@@ -98,18 +98,18 @@ def cria_alimento():
 
     alimento_dao.salvar(novo_alimento)
     lista = alimento_dao.listar()
-    return render_template('Alimento.html', alimentos=lista)
+    return render_template("Alimento.html", alimentos=lista)
 
-@app.route('/alterar_alimento', methods=['POST', ])
+@app.route("/alterar_alimento", methods=["POST", ])
 def alterar_alimento():
-    codigo = request.form['codigo']
-    nome = request.form['nome']
-    descricao = request.form['descricao']
-    valor_calorico = request.form['valor_calorico']
-    valor_gordura = request.form['valor_gordura']
-    valor_proteina = request.form['valor_proteina']
-    valor_carboidrato = request.form['valor_carboidrato']
-    if request.form.get('ativo') == None:
+    codigo = request.form["codigo"]
+    nome = request.form["nome"]
+    descricao = request.form["descricao"]
+    valor_calorico = request.form["valor_calorico"]
+    valor_gordura = request.form["valor_gordura"]
+    valor_proteina = request.form["valor_proteina"]
+    valor_carboidrato = request.form["valor_carboidrato"]
+    if request.form.get("ativo") == None:
         ativo = False
     else:
         ativo = True
@@ -120,44 +120,44 @@ def alterar_alimento():
     alimento_dao.salvar(alimento_editado)
     lista = alimento_dao.listar()
 
-    return render_template('Alimento.html', alimentos=lista)
+    return render_template("Alimento.html", alimentos=lista)
 
-@app.route('/cardapio')
+@app.route("/cardapio")
 def cardapio():
     lista = cardapio_dao.listar()
-    return render_template('Cardapio.html', cardapios=lista)
+    return render_template("Cardapio.html", cardapios=lista)
 
-@app.route('/cria_cardapio', methods = ['POST', ])
+@app.route("/cria_cardapio", methods = ["POST", ])
 def cria_cardapio():
-    data_inicio = request.form['data_inicio']
-    data_fim = request.form['data_fim']
+    data_inicio = request.form["data_inicio"]
+    data_fim = request.form["data_fim"]
     novo_cardapio = Cardapio(data_inicio=data_inicio, data_fim=data_fim)
 
     cardapio_dao.salvar(novo_cardapio)
     lista = cardapio_dao.listar()
-    return render_template('Cardapio.html', cardapios=lista)
+    return render_template("Cardapio.html", cardapios=lista)
 
-@app.route('/alterar_cardapio', methods=['POST', ])
+@app.route("/alterar_cardapio", methods=["POST", ])
 def alterar_cardapio():
-    codigo = request.form['codigo']
-    data_inicio = request.form['data_inicio']
-    data_fim = request.form['data_fim']
+    codigo = request.form["codigo"]
+    data_inicio = request.form["data_inicio"]
+    data_fim = request.form["data_fim"]
     cardapio_atualizado = Cardapio(data_inicio=data_inicio, data_fim=data_fim, codigo=codigo)
     cardapio_dao.salvar(cardapio_atualizado)
     lista = cardapio_dao.listar()
 
-    return render_template('Cardapio.html', cardapios=lista)
+    return render_template("Cardapio.html", cardapios=lista)
 
-@app.route('/ficha_atividade_fisica')
+@app.route("/ficha_atividade_fisica")
 def ficha_atividade_fisica():
     #lista = ficha_atividade_fisica_dao.listar()
-    return render_template('FichaAtividadeFisica.html')
+    return render_template("FichaAtividadeFisica.html")
 
-@app.route('/usuario')
+@app.route("/usuario")
 def usuario():
-    return render_template('Usuario.html')
+    return render_template("Usuario.html")
     
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
 
