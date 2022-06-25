@@ -224,12 +224,12 @@ class FichaAtividadeFisicaDao:
             cursor = self.__db.cursor()
         #codigo_usuario, data_inicio, data_fim, codigo=None 
         if(ficha_atividade.codigo):
-            dados_ficha_atividade_atualizacao = [ficha_atividade.codigo_usuario, ficha_atividade.data_inicio, ficha_atividade.data_fim, ficha_atividade.codigo]
-            SQL_ATUALIZA_FICHA_ATIVIDADE="UPDATE ficha_atividade SET codigo_usuario = ?, data_inicio = ?, data_fim = ? WHERE id = ? "
+            dados_ficha_atividade_atualizacao = [ficha_atividade.data_inicio, ficha_atividade.data_fim, ficha_atividade.usuario, ficha_atividade.codigo]
+            SQL_ATUALIZA_FICHA_ATIVIDADE="UPDATE ficha_atividade SET  data_inicio = ?, data_fim = ?, usuario_praticante_id = ? WHERE id = ? "
             cursor.execute(SQL_ATUALIZA_FICHA_ATIVIDADE, dados_ficha_atividade_atualizacao)
         else:
-            dados_ficha_atividade_insercao = [ficha_atividade.codigo_usuario, ficha_atividade.data_inicio, ficha_atividade.data_fim]
-            SQL_CRIA_FICHA_ATIVIDADE="INSERT INTO ficha_atividade (codigo_usuario, data_inicio, data_fim) VALUES (?, ?, ?) "
+            dados_ficha_atividade_insercao = [ficha_atividade.data_inicio, ficha_atividade.data_fim,ficha_atividade.usuario]
+            SQL_CRIA_FICHA_ATIVIDADE="INSERT INTO ficha_atividade (data_inicio, data_fim, usuario_praticante_id) VALUES (?, ?, ?) "
             cursor.execute(SQL_CRIA_FICHA_ATIVIDADE, dados_ficha_atividade_insercao)
         
         conexao.commit()
@@ -246,8 +246,9 @@ class FichaAtividadeFisicaDao:
         else:
             cursor = self.__db.cursor()
         
-        SQL_BUSCA_FICHA_ATIVIDADE="SELECT id, codigo_usuario, data_inicio, data_fim " \
-        "FROM ficha_atividade "
+        SQL_BUSCA_FICHA_ATIVIDADE="SELECT ficha_atividade.id, ficha_atividade.data_inicio, ficha_atividade.data_fim ,ficha_atividade.usuario_praticante_id " \
+        "FROM ficha_atividade " \
+        "inner join usuario on usuario.id = ficha_atividade.usuario_praticante_id"
         cursor.execute(SQL_BUSCA_FICHA_ATIVIDADE)
         fichas_atividade = traduz_ficha_atividade(cursor.fetchall())
 
@@ -258,7 +259,7 @@ class FichaAtividadeFisicaDao:
 
 def traduz_ficha_atividade(fichas_atividade):
     def cria_ficha_atividade_com_tupla(tupla):
-        return FichaAtividade(codigo_usuario=tupla[1],data_inicio=tupla[2],data_fim=tupla[3],codigo=tupla[0])  
+        return FichaAtividadeFisica(data_inicio=tupla[1],data_fim=tupla[2],usuario=tupla[3],codigo=tupla[0])  
     return list(map(cria_ficha_atividade_com_tupla, fichas_atividade))
     
 

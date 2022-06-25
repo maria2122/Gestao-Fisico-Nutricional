@@ -146,7 +146,7 @@ class Usuario:
         self.__cliente=cliente
         self.__profissional_ed_fisica=profissional_ed_fisica
         self.__nutricionista=nutricionista
-        self.__admninstrador=administrador
+        self.__administrador=administrador
 
     
     @property
@@ -206,7 +206,7 @@ class Usuario:
         self.__administrador = administrador
 
 class FichaAtividadeFisica:
-    def __init__(self, data_inicio, data_fim,usuario:Usuario, codigo=None):
+    def __init__(self, data_inicio, data_fim, usuario:Usuario, codigo=None):
         # Atributos Privados
         self.__codigo=codigo
         self.__data_inicio=data_inicio

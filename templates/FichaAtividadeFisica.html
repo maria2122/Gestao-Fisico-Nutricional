@@ -1,16 +1,19 @@
 {%extends "Template.html"%}
     {%block conteudo %}
     <h1>Ficha Atividade Física</h1>
-    <form id="formFichaAtividadeFisica" action="/cria_ficha_atividade_fisica" method="POST">
+    <form id="formFichaAtividadeFisica" action="/criar_ficha_atividade_fisica" method="POST">
         <label id="label" hidden>Código</label>
         <input type="text" name="codigo" id="codigo" readonly="true" hidden/>
         </br> 
         <label>Data Inicio</label>
         <input type="date" name="data_inicio" id="data_inicio">
-        <br>
+        </br>
         <label>Data Fim</label>
         <input type="date" name="data_fim" id="data_fim">
-        <br>
+        </br>
+        <label>Usuario</label>
+        <input type="text" name="usuario" id="usuario">
+        </br>
         <input id="btnFichaAtividadeFisica" type="submit" class="btn btn-primary" value="Enviar">
     </form>
 
@@ -20,6 +23,7 @@
                 <th>Código</th>
                 <th>Data Inicio</th>
                 <th>Data Fim</th>
+                <th>Usuario</th>
         </thead>
         <tbody>
         {% for ficha_atividade_fisica in ficha_atividade_fisicas %}
@@ -27,6 +31,7 @@
                 <td>{{ficha_atividade_fisica.codigo}}</td>
                 <td>{{ficha_atividade_fisica.data_inicio}}</td>
                 <td>{{ficha_atividade_fisica.data_fim}}</td>
+                <td>{{ficha_atividade_fisica.usuario}}</td>
                 <td><button onclick="carregaDadosDaTabelaParaFormFichaAtividadeFisica(this)" type="submit" class="btn btn-primary">Editar</button></td>
             </tr>
         {% endfor %}

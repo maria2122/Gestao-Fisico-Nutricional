@@ -1,6 +1,6 @@
 from re import A
-from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao, load_banco_de_dados
-from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica
+from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao,UsuarioDao, load_banco_de_dados
+from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica, Usuario
 from flask import Flask, render_template, request, session, redirect
 
 
@@ -12,6 +12,7 @@ atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
 cardapio_dao = CardapioDao(DB)
 ficha_atividade_fisica_dao = FichaAtividadeFisicaDao(DB)
+usuario_dao = UsuarioDao(DB)
 load_banco_de_dados(DB, "CriaBD")
 load_banco_de_dados(DB, "InsereDados")
 
@@ -79,8 +80,8 @@ def alimento():
     lista = alimento_dao.listar()
     return render_template("Alimento.html", alimentos=lista)
 
-@app.route("/cria_alimento", methods = ["POST", ])
-def cria_alimento():
+@app.route("/criar_alimento", methods = ["POST", ])
+def criar_alimento():
 #nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None)
     nome = request.form["nome"]
     descricao = request.form["descricao"]
@@ -150,13 +151,96 @@ def alterar_cardapio():
 
 @app.route("/ficha_atividade_fisica")
 def ficha_atividade_fisica():
-    #lista = ficha_atividade_fisica_dao.listar()
-    return render_template("FichaAtividadeFisica.html")
+    lista = ficha_atividade_fisica_dao.listar()
+    return render_template("FichaAtividadeFisica.html", ficha_atividade_fisicas=lista)
+
+@app.route("/criar_ficha_atividade_fisica", methods = ["POST", ])
+def criar_ficha_atividade_fisica():
+    data_inicio = request.form["data_inicio"]
+    data_fim = request.form["data_fim"]
+    usuario = request.form["usuario"]
+    nova_ficha_atividade_fisica = FichaAtividadeFisica(data_inicio=data_inicio, data_fim=data_fim, usuario=usuario)
+
+    ficha_atividade_fisica_dao.salvar(nova_ficha_atividade_fisica)
+    lista = ficha_atividade_fisica_dao.listar()
+    return render_template("FichaAtividadeFisica.html", ficha_atividade_fisicas=lista)    
+
+@app.route("/alterar_ficha_atividade_fisica", methods=["POST", ])
+def alterar_ficha_atividade_fisica():
+    codigo = request.form["codigo"]
+    data_inicio = request.form["data_inicio"]
+    data_fim = request.form["data_fim"]
+    usuario = request.form["usuario"]
+
+    ficha_atividade_fisica_atualizada = FichaAtividadeFisica(data_inicio=data_inicio, data_fim=data_fim, usuario=usuario, codigo=codigo)
+    ficha_atividade_fisica_dao.salvar(ficha_atividade_fisica_atualizada)
+    lista = ficha_atividade_fisica_dao.listar()
+
+    return render_template("FichaAtividadeFisica.html", ficha_atividade_fisicas=lista)
 
 @app.route("/usuario")
 def usuario():
-    return render_template("Usuario.html")
+    lista = usuario_dao.listar()
+    return render_template("Usuario.html",usuarios=lista)
+
+@app.route("/criar_usuario", methods = ["POST", ])
+def criar_usuario():
+    nome = request.form["nome"]
+    login = request.form["login"]
+    senha = request.form["senha"]
+    if request.form.get("cliente") == None:
+        cliente = False
+    else:
+        cliente = True
+    if request.form.get("profissional_ed_fisica") == None:
+        profissional_ed_fisica = False
+    else:
+        profissional_ed_fisica = True
+    if request.form.get("nutricionista") == None:
+        nutricionista = False
+    else:
+        nutricionista = True
+    if request.form.get("administrador") == None:
+        administrador = False
+    else:
+        administrador = True
     
+    novo_usuario = Usuario(nome=nome, login=login, senha=senha,cliente=cliente, profissional_ed_fisica=profissional_ed_fisica, nutricionista=nutricionista, administrador=administrador)
+
+    usuario_dao.salvar(novo_usuario)
+    lista = usuario_dao.listar()
+    return render_template("Usuario.html", usuarios=lista)
+
+@app.route("/alterar_usuario", methods=["POST", ])
+def alterar_usuario():
+    codigo = request.form["codigo"]
+    nome = request.form["nome"]
+    login = request.form["login"]
+    senha = request.form["senha"]
+    if request.form.get("cliente") == None:
+        cliente = False
+    else:
+        cliente = True
+    if request.form.get("profissional_ed_fisica") == None:
+        profissional_ed_fisica = False
+    else:
+        profissional_ed_fisica = True
+    if request.form.get("nutricionista") == None:
+        nutricionista = False
+    else:
+        nutricionista = True
+    if request.form.get("administrador") == None:
+        administrador = False
+    else:
+        administrador = True
+    
+    usuario_atualizado = Usuario(nome=nome, login=login, senha=senha,cliente=cliente, profissional_ed_fisica=profissional_ed_fisica, nutricionista=nutricionista, administrador=administrador, codigo=codigo)
+
+    usuario_dao.salvar(usuario_atualizado)
+    lista = usuario_dao.listar()
+
+    return render_template("Usuario.html", usuarios=lista) 
+
 
 if __name__ == "__main__":
     app.run(debug=True)
