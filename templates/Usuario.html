@@ -1,61 +1,64 @@
 {% extends "Template.html"%}
 {% block conteudo %}
 
-    <div>
-        <h1>Usuarios</h1>
-        <form class="col" id="formUsuario" action="/criar_usuario" method="post">
-            <label id="label" hidden>Código</label>
-            <input type="text" name="codigo" id="codigo" readonly="true" hidden/>
-            </br> 
-            <label>Nome</label>
-            <input type="text" name="nome" id="nome">
-            </br>
-            <label>Login</label>
-            <input type="text"  name="login" id="login">
-            </br>
-            <label>Senha</label>
-            <input type="password"  name="senha" id="senha">
-            </br>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Tipo de Usuário
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Cliente</a></li>
-                  <li><a class="dropdown-item" href="#">Profissional Ed.Física</a></li>
-                  <li><a class="dropdown-item" href="#">Nutricionista</a></li>
-                  <li><a class="dropdown-item" href="#">Administrador</a></li>
-                </ul>
-            </div>
-            </br>
-            <input id="btnAlimento" type="submit" class="btn btn-primary" value="Enviar">
-        </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Nome</th>
-                    <th>Cliente</th>
-                    <th>Profissional Ed.Física</th>
-                    <th>Nutricionista</th>
-                    <th>Administrador</th>
-                    <th>Editar</th>
-                </tr>
-            </thead>
-            <tbody>
+<div>
+    <h1>Usuarios</h1>
+    <form class="col" id="formUsuario" action="/criar_usuario" method="post">
+        <label id="label" hidden>Código</label>
+        <input type="text" name="codigo" id="codigo" readonly="true" hidden />
+        </br>
+        <label>Nome</label>
+        <input type="text" name="nome" id="nome">
+        </br>
+        <label>Login</label>
+        <input type="text" name="login" id="login">
+        </br>
+        <label id="labelSenha">Senha</label>
+        <input type="password" name="senha" id="senha">
+        </br>
+        <label>Cliente</label>
+        <input type="checkbox" value="1" name="cliente" id="cliente">
+        </br>
+        <label>Profissional Ed.Física</label>
+        <input type="checkbox" value="1" name="profissional_ed_fisica" id="profissional_ed_fisica">
+        </br>
+        <label>Nutricionista</label>
+        <input type="checkbox" value="1" name="nutricionista" id="nutricionista">
+        </br>
+        <label>Administrador</label>
+        <input type="checkbox" value="1" name="administrador" id="administrador">
+        </br>
+        
+        <input id="btnUsuario" type="submit" class="btn btn-primary" value="Enviar">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Login</th>
+                <th>Cliente</th>
+                <th>Profissional Ed.Física</th>
+                <th>Nutricionista</th>
+                <th>Administrador</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for usuario in usuarios %}
-                <tr>
-                    <td>{{usuario.codigo}}</td>
-                    <td>{{usuario.nome}}</td>
-                    <td>{{usuario.cliente}}</td>
-                    <td>{{usuario.profissional_ed_fisica}}</td>
-                    <td>{{usuario.nutricionista}}</td>
-                    <td>{{usuario.administrador}}</td>
-                    <td><button onclick="carregaDadosDaTabelaParaFormUsuario(this)" type="submit" class="btn btn-primary">Editar</button></td>
-                </tr>
+            <tr>
+                <td>{{usuario.codigo}}</td>
+                <td>{{usuario.nome}}</td>
+                <td>{{usuario.login}}</td>
+                <td>{{usuario.cliente}}</td>
+                <td>{{usuario.profissional_ed_fisica}}</td>
+                <td>{{usuario.nutricionista}}</td>
+                <td>{{usuario.administrador}}</td>
+                <td><button onclick="carregaDadosDaTabelaParaFormUsuario(this)" type="submit" class="btn btn-primary">Editar</button></td>
+            </tr>
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    
+        </tbody>
+    </table>
+</div>
+
 {%endblock %}
