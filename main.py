@@ -31,7 +31,8 @@ def login():
 
 @app.route("/Cadastro_user")
 def Cadastro_user():
-    return render_template("Cadastro_user.html")
+    lista = usuario_dao.listar()
+    return render_template("Cadastro_user.html", usuarios=lista)
 
 @app.route("/atividadefisica")
 def atividadefisica():
