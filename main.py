@@ -1,7 +1,7 @@
 from re import A
 from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao,UsuarioDao, load_banco_de_dados
 from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica, Usuario
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect,flash
 
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ load_banco_de_dados(DB, "InsereDados")
 user =None
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("login.html")
 
 @app.route("/ADM")
 def ADM():
@@ -27,7 +27,32 @@ def ADM():
     
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    proxima=request.args.get('proxima')
+    if proxima ==None:
+        proxima=''
+    return render_template('login.html',proxima=proxima)
+
+
+@app.route('/logout')
+def logout():
+     session['usuario_logado']= None
+     flash('nada logado')
+     return render_template('login.html')
+  
+
+
+@app.route('/autenticador', methods=['POST'])
+def autenticador():
+    usuario=usuario_dao.buca_usuario_por_login(request.form['login'])
+    if usuario:
+        if usuario._senha == request.form['senha']:
+            session['usuario_logado'] = request.form['login']
+            proxima_pagina = request.form['proxima']
+            if proxima_pagina =='':
+                return redirect("/")
+            else:
+                return redirect('/{}'.format(proxima_pagina))
+            
 
 @app.route("/Cadastro_user")
 def Cadastro_user():
