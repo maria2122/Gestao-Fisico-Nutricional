@@ -28,7 +28,7 @@ form{
  form ,label{
     display: block;
     padding: 0px;
-    text-align: right;
+    text-align: left;
     
 
 }
@@ -38,25 +38,32 @@ table{
     max-width: 100%;
     max-height: 100%;
     text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+    
 }
 
 body{
-        font-family: "Poppins", sans-serif;
-        grid-template-columns: repeat 
+    background-image: url(https://img.freepik.com/vetores-gratis/fundo-de-textura-abstrato-verde-com-aquarela_65186-2633.jpg?w=2000);
+    /* background-image: url(https://cdn.pixabay.com/photo/2015/07/03/12/24/background-830134_960_720.jpg);   */
+    font-family: "Poppins", sans-serif;
+     grid-template-columns: repeat 
         
 }
 
 
 .conteudo{
-    background-color: aqua;
+    background-image:url(IMG/fundo1.png);
+    border-radius: 8%;
     margin-top: 100px;
     margin-left: 280px;
-    margin-right:50px ;
+    margin-right:280px ;
      /*ativa o grid*/
      display: grid;
      /*divindo o conteiner em colunas 2 */
     grid-template-rows: repeat(2);
-    grid
+    text-align: center;
+    
 }
 .left h3{
     color: #fff;
