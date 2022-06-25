@@ -2,20 +2,20 @@ from models import Alimento, Cardapio, AtividadeFisica,Usuario,FichaAtividadeFis
 from sqlite3 import connect
 
 
-MECANISMO_BANCO_NOME = 'SQLITE' # Qual mecanismo de banco de dados será utilizado?
+MECANISMO_BANCO_NOME = "SQLITE" # Qual mecanismo de banco de dados será utilizado?
 SQL_CRIA_ATIVIDADEFISICA = "INSERT into atividade_fisica (nome, descricao, gasto_calorico, ativo) values (?,?,?,?)"
-SQL_BUSCA_ATIVIDADEFISICA = 'SELECT id, nome, descricao, gasto_calorico, ativo from atividade_fisica'
-SQL_ATUALIZA_ATIVIDADEFISICA = 'UPDATE atividade_fisica SET nome=?, descricao=?, gasto_calorico=?, ativo=? where id=?'
-SQL_DELETA_ATIVIDADEFISICA = 'delete from atividadefisica where codigo = ?'
+SQL_BUSCA_ATIVIDADEFISICA = "SELECT id, nome, descricao, gasto_calorico, ativo from atividade_fisica"
+SQL_ATUALIZA_ATIVIDADEFISICA = "UPDATE atividade_fisica SET nome=?, descricao=?, gasto_calorico=?, ativo=? where id=?"
+SQL_DELETA_ATIVIDADEFISICA = "delete from atividadefisica where codigo = ?"
 
-SQL_DELETA_CARDAPIO='DELETE FROM cardapio WHERE id = ? '
+SQL_DELETA_CARDAPIO="DELETE FROM cardapio WHERE id = ? "
 
 class AtividadeFisicaDao:
     def __init__(self, db):
         self.__db = db
 
     def salvar(self, atividadefisica:AtividadeFisica):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
@@ -29,13 +29,13 @@ class AtividadeFisicaDao:
 
         conexao.commit()
         
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
             
         return atividadefisica
 
     def listar(self):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
@@ -56,7 +56,7 @@ class AlimentoDao:
         self.__db = db
 
     def salvar(self, alimento:Alimento):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
@@ -79,13 +79,13 @@ class AlimentoDao:
 
         conexao.commit()
         
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
 
         return alimento
 
     def listar(self):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
@@ -96,7 +96,7 @@ class AlimentoDao:
         cursor.execute(SQL_BUSCA_ALIMENTOS)
         alimentos =   traduz_alimentos(cursor.fetchall())
         
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
             
         return alimentos    
@@ -115,7 +115,7 @@ class CardapioDao:
         self.__db = db
 
     def salvar(self, cardapio:Cardapio):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
@@ -123,33 +123,33 @@ class CardapioDao:
 
         if(cardapio.codigo):
             dados_cardapio_atualizacao = [cardapio.data_inicio, cardapio.data_fim, cardapio.codigo]
-            SQL_ATUALIZA_CARDAPIO='UPDATE cardapio SET data_inicio = ?, data_fim = ? WHERE id = ? '
+            SQL_ATUALIZA_CARDAPIO="UPDATE cardapio SET data_inicio = ?, data_fim = ? WHERE id = ? "
             cursor.execute(SQL_ATUALIZA_CARDAPIO, dados_cardapio_atualizacao)
         else:
             dados_cardapio_insercao = [cardapio.data_inicio, cardapio.data_fim]
-            SQL_CRIA_CARDAPIO='INSERT INTO cardapio (data_inicio, data_fim) VALUES (?, ?) '
+            SQL_CRIA_CARDAPIO="INSERT INTO cardapio (data_inicio, data_fim) VALUES (?, ?) "
             cursor.execute(SQL_CRIA_CARDAPIO, dados_cardapio_insercao)
             
         conexao.commit()
 
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
 
         return cardapio
     
     def listar(self):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
             cursor = self.__db.cursor()
         
-        SQL_BUSCA_CARDAPIO='SELECT id, data_inicio, data_fim ' \
-        'FROM cardapio '
+        SQL_BUSCA_CARDAPIO="SELECT id, data_inicio, data_fim " \
+        "FROM cardapio "
         cursor.execute(SQL_BUSCA_CARDAPIO)
         cardapios = traduz_cardapio(cursor.fetchall())
 
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
 
         return cardapios
@@ -166,7 +166,7 @@ class UsuarioDao:
         self.__db = db
     
     def salvar(self, usuario:Usuario):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
@@ -175,33 +175,33 @@ class UsuarioDao:
         if(usuario.codigo):
             dados_usuario_atualizacao = [usuario.nome, usuario.login, usuario.senha, usuario.cliente, usuario.profissional_ed_fisica, 
                                         usuario.nutricionista, usuario.administrador, usuario.codigo]
-            SQL_ATUALIZA_USUARIO='UPDATE usuario SET nome = ?, login = ?, senha = ?, cliente = ?, profissional_ed_fisica = ?, nutricionista = ?, administrador = ? WHERE id = ? '
+            SQL_ATUALIZA_USUARIO="UPDATE usuario SET nome = ?, login = ?, senha = ?, cliente = ?, profissional_ed_fisica = ?, nutricionista = ?, administrador = ? WHERE id = ? "
             cursor.execute(SQL_ATUALIZA_USUARIO, dados_usuario_atualizacao)
         else:
             dados_usuario_insercao = [usuario.nome, usuario.login, usuario.senha, usuario.cliente, usuario.profissional_ed_fisica, 
                                       usuario.nutricionista, usuario.administrador]
-            SQL_CRIA_USUARIO='INSERT INTO usuario (nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador) VALUES (?, ?, ?, ?, ?, ?, ?) '
+            SQL_CRIA_USUARIO="INSERT INTO usuario (nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador) VALUES (?, ?, ?, ?, ?, ?, ?) "
             cursor.execute(SQL_CRIA_USUARIO, dados_usuario_insercao)
         
         conexao.commit()
 
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
         
         return usuario
     def listar(self):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
             cursor = self.__db.cursor()
         
-        SQL_BUSCA_USUARIO='SELECT id, nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador ' \
-        'FROM usuario '
+        SQL_BUSCA_USUARIO="SELECT id, nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador " \
+        "FROM usuario "
         cursor.execute(SQL_BUSCA_USUARIO)
         usuarios = traduz_usuario(cursor.fetchall())
 
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
 
         return usuarios
@@ -217,7 +217,7 @@ class FichaAtividadeFisicaDao:
         self.__db = db
     
     def salvar(self, ficha_atividade:FichaAtividadeFisica):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
@@ -225,33 +225,33 @@ class FichaAtividadeFisicaDao:
         #codigo_usuario, data_inicio, data_fim, codigo=None 
         if(ficha_atividade.codigo):
             dados_ficha_atividade_atualizacao = [ficha_atividade.codigo_usuario, ficha_atividade.data_inicio, ficha_atividade.data_fim, ficha_atividade.codigo]
-            SQL_ATUALIZA_FICHA_ATIVIDADE='UPDATE ficha_atividade SET codigo_usuario = ?, data_inicio = ?, data_fim = ? WHERE id = ? '
+            SQL_ATUALIZA_FICHA_ATIVIDADE="UPDATE ficha_atividade SET codigo_usuario = ?, data_inicio = ?, data_fim = ? WHERE id = ? "
             cursor.execute(SQL_ATUALIZA_FICHA_ATIVIDADE, dados_ficha_atividade_atualizacao)
         else:
             dados_ficha_atividade_insercao = [ficha_atividade.codigo_usuario, ficha_atividade.data_inicio, ficha_atividade.data_fim]
-            SQL_CRIA_FICHA_ATIVIDADE='INSERT INTO ficha_atividade (codigo_usuario, data_inicio, data_fim) VALUES (?, ?, ?) '
+            SQL_CRIA_FICHA_ATIVIDADE="INSERT INTO ficha_atividade (codigo_usuario, data_inicio, data_fim) VALUES (?, ?, ?) "
             cursor.execute(SQL_CRIA_FICHA_ATIVIDADE, dados_ficha_atividade_insercao)
         
         conexao.commit()
 
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
         
         return ficha_atividade
 
     def listar(self):
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao = connect(self.__db)
             cursor = conexao.cursor()
         else:
             cursor = self.__db.cursor()
         
-        SQL_BUSCA_FICHA_ATIVIDADE='SELECT id, codigo_usuario, data_inicio, data_fim ' \
-        'FROM ficha_atividade '
+        SQL_BUSCA_FICHA_ATIVIDADE="SELECT id, codigo_usuario, data_inicio, data_fim " \
+        "FROM ficha_atividade "
         cursor.execute(SQL_BUSCA_FICHA_ATIVIDADE)
         fichas_atividade = traduz_ficha_atividade(cursor.fetchall())
 
-        if MECANISMO_BANCO_NOME == 'SQLITE':
+        if MECANISMO_BANCO_NOME == "SQLITE":
             conexao.close()
 
         return fichas_atividade
@@ -264,26 +264,26 @@ def traduz_ficha_atividade(fichas_atividade):
 
 # Operacao: InsereDados Ou CriaBD
 def load_banco_de_dados(Conexao, Operacao):
-    if MECANISMO_BANCO_NOME == 'SQLITE':
+    if MECANISMO_BANCO_NOME == "SQLITE":
         conexao = connect(Conexao)
         cursor = conexao.cursor()
-        if Operacao == 'CriaBD':
-            arquivo = open('static/2 - database objects (SQLite).sql', 'r+')
-        elif Operacao == 'InsereDados':
-            arquivo = open('static/2 - data record (SQLite).sql', 'r+')
+        if Operacao == "CriaBD":
+            arquivo = open("static/2 - database objects (SQLite).sql", "r+")
+        elif Operacao == "InsereDados":
+            arquivo = open("static/2 - data record (SQLite).sql", "r+")
     else:
         cursor = Conexao.cursor()
-        if Operacao == 'CriaBD':
-            arquivo = open('static/1 - database objects (MYSQL).sql', 'r+')
-        elif Operacao == 'InsereDados':
-            arquivo = open('static/1 - data record (MYSQL).sql', 'r+')
+        if Operacao == "CriaBD":
+            arquivo = open("static/1 - database objects (MYSQL).sql", "r+")
+        elif Operacao == "InsereDados":
+            arquivo = open("static/1 - data record (MYSQL).sql", "r+")
         
     todos_comandos = arquivo.read()
-    todos_comandos_separados = todos_comandos.split(';')
+    todos_comandos_separados = todos_comandos.split(";")
     for comando in todos_comandos_separados:
         cursor.execute(comando)
 
     conexao.commit()
 
-    if MECANISMO_BANCO_NOME == 'SQLITE':
+    if MECANISMO_BANCO_NOME == "SQLITE":
         conexao.close()
