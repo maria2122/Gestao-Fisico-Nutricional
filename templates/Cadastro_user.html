@@ -1,34 +1,61 @@
-{%extends "Template.html"%}
-{%block conteudo %}
+{% extends "Template.html"%}
+{% block conteudo %}
+
     <div>
-        <h1>Cadastro usuario</h1>
-        <form id="formCadastroUser " action="/cadastrar_User" method="post">
+        <h1>Usuarios</h1>
+        <form class="col" id="formUsuario" action="/criar_usuario" method="post">
             <label id='label' hidden>Código</label>
             <input type='text' name='codigo' id='codigo' readonly='true' hidden/>
-            </br>
+            </br> 
             <label>Nome</label>
             <input type="text" name="nome" id="nome">
-            <br>
+            </br>
             <label>Login</label>
-            <input type="text" name="login" id="login">
-            <br>
+            <input type="text"  name="login" id="login">
+            </br>
             <label>Senha</label>
-            <input type="number" name="senha" id="senha">
-            <br>
-            <label>Cliente</label>
-            <input type="checkbox"  value="1" name="Cliente_box" id="ativo">
-            <br>
-            <label>Profissional Físico</label>
-            <input type="checkbox"  value="1" name="Fisico_box" id="ativo">
-            <br>
-            <label>Profissional da Saúde</label>
-            <input type="checkbox"  value="1" name="saude_box" id="ativo">
-            <br>
-            <label>Administrador</label>
-            <input type="checkbox"  value="1" name="Adm_box" id="ativo">
-            <br>
-            <input id="btnCadastrarUser" type="submit" class="btn btn-primary" value="Enviar"> 
+            <input type="password"  name="senha" id="senha">
+            </br>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Tipo de Usuário
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Cliente</a></li>
+                  <li><a class="dropdown-item" href="#">Profissional Ed.Física</a></li>
+                  <li><a class="dropdown-item" href="#">Nutricionista</a></li>
+                  <li><a class="dropdown-item" href="#">Administrador</a></li>
+                </ul>
+            </div>
+            </br>
+            <input id="btnAlimento" type="submit" class="btn btn-primary" value="Enviar">
         </form>
-       
-    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Cliente</th>
+                    <th>Profissional Ed.Física</th>
+                    <th>Nutricionista</th>
+                    <th>Administrador</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{usuario.codigo}}</td>
+                    <td>{{usuario.nome}}</td>
+                    <td>{{usuario.cliente}}</td>
+                    <td>{{usuario.profissional_ed_fisica}}</td>
+                    <td>{{usuario.nutricionista}}</td>
+                    <td>{{usuario.administrador}}</td>
+                    <td><button onclick="carregaDadosDaTabelaParaFormUsuario(this)" type="submit" class="btn btn-primary">Editar</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
 {%endblock %}
