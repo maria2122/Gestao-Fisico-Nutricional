@@ -19,7 +19,10 @@ load_banco_de_dados(DB, "InsereDados")
 user =None
 @app.route("/")
 def index():
-    return render_template("login.html")
+    if 'usuario_logado' not in session or session['usuario_logado']==None:
+        return redirect('/login')
+    return render_template("index.html")
+
 
 @app.route("/ADM")
 def ADM():
@@ -43,15 +46,20 @@ def logout():
 
 @app.route('/autenticador', methods=['POST'])
 def autenticador():
-    usuario=usuario_dao.buca_usuario_por_login(request.form['login'])
+    
+    usuario=usuario_dao.busca_usuario_por_login(request.form['login'])
+    
     if usuario:
-        if usuario._senha == request.form['senha']:
+        if usuario.senha == request.form['senha']:
             session['usuario_logado'] = request.form['login']
             proxima_pagina = request.form['proxima']
             if proxima_pagina =='':
                 return redirect("/")
             else:
+                flash
                 return redirect('/{}'.format(proxima_pagina))
+
+    return redirect('/login')
             
 
 @app.route("/Cadastro_user")
