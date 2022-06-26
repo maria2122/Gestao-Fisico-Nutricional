@@ -1,7 +1,7 @@
 from re import A
 from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao,UsuarioDao, load_banco_de_dados
 from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica, Usuario
-from flask import Flask, render_template, request, session, redirect,flash
+from flask import Flask, render_template, request, session, redirect
 
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app.secret_key = "teste"
 DB = "dbgestaofisiconutricional.db"
 atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
-cardapio_dao = CardapioDao(DB)
+cardapio_dao = CardapioDao(DB)s
 ficha_atividade_fisica_dao = FichaAtividadeFisicaDao(DB)
 usuario_dao = UsuarioDao(DB)
 load_banco_de_dados(DB, "CriaBD")
@@ -21,9 +21,7 @@ user =None
 def index():
     if 'usuario_logado' not in session or session['usuario_logado']==None:
         return redirect('/login')
-        
     return render_template("index.html")
-
 
 @app.route("/ADM")
 def ADM():
@@ -64,7 +62,6 @@ def autenticador():
                 return redirect('/{}'.format(proxima_pagina))
     flash('Erro no login')
     return redirect('/login')
-            
 
 @app.route("/Cadastro_user")
 def Cadastro_user():
