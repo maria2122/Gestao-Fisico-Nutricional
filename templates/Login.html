@@ -34,9 +34,22 @@
 			<img src="../static/IMG/art.svg">
 		</div>
 		<div class="login-content">
-			<form action="index.html">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul id="messages" class="list-unstyled">
+                {% for message in messages %}
+                    <li class="alert alert-success">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+
+			<form method="POST" action="/autenticador">
+                <input type="hidden" name="proxima" value="{{proxima}}">
 				<img src="../static/IMG/avatar.svg">
 				<h2 class="title">bem vindo</h2>
+
            		<div class="input-div one">
 					   <!--i icones fas fa-user = icone de usuario --> 
            		   <div class="i">
@@ -44,28 +57,30 @@
            		   </div>
            		   <div class="div">
            		   		<h5>Username</h5>
-           		   		<input type="text" class="input">
+           		   		<input type="text" class="input" name="login" required>
            		   </div>
+
            		</div>
+
            		<div class="input-div pass">
-					   <!--i icones fas fa-lock = icone de cadeado --> 
+					   <!--i icones faz os icones . fa-lock = icone de cadeado --> 
            		   <div class="i"> 
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" class="input">
+           		    	<input type="password" class="input" name="senha" required>
             	   </div>
             	</div>
 				
             	<a href="#">Forgot Password?</a>
-            	<input type="submit" class="btn" value="Login">
+            	<input type="submit" class="btn" >
             </form>
         </div>
     </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
-<
+
     
    
    

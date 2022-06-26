@@ -206,11 +206,25 @@ class UsuarioDao:
 
         return usuarios
 
+    def busca_usuario_por_login(self,login):
+        conexao = connect(self.__db)
+        cursor = conexao.cursor()
+        cursor.execute("SELECT id, nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador from usuario where login=? ",(login,));
+        dados = cursor.fetchone()
+        usuario = traduz_login(dados) if dados else None
+        return usuario
+
+def traduz_login(tupla):
+    return Usuario(codigo=tupla[0], nome=tupla[1], login=tupla[2], senha=tupla[3], cliente=tupla[4], profissional_ed_fisica=tupla[5], nutricionista=tupla[6], administrador=tupla[7])  
+
 def traduz_usuario(usuarios):
     def cria_usuario_com_tupla(tupla):
         return Usuario(nome=tupla[1],login=tupla[2],senha=tupla[3],cliente=tupla[4],
         profissional_ed_fisica=tupla[5],nutricionista=tupla[6],administrador=tupla[7],codigo=tupla[0])  
     return list(map(cria_usuario_com_tupla, usuarios))
+
+
+
 
 class FichaAtividadeFisicaDao:
     def __init__(self, db):

@@ -2,23 +2,26 @@
 {%block conteudo %}
     <div>
         <h1>Atividade Física</h1>
-        <form id="formAtividadeFisica" action="/criar_atividadefisica" method="post">
+        <form class="form" id="formAtividadeFisica" action="/criar_atividadefisica" method="post">
             <label id="label" hidden>Código</label>
             <input type="text" name="codigo" id="codigo" readonly="true" hidden/>
-            </br>
-            <label>Nome</label>
-            <input type="text" name="nome" id="nome">
-            <br>
-            <label>Descrição</label>
-            <input type="text" name="descricao" id="descricao">
-            <br>
-            <label>Gasto Calorico</label>
-            <input type="number" name="gasto_calorico" id="gasto_calorico">
-            <br>
+            
+            <div class="col-md-4 mb-3">
+            <input type="text" name="nome" id="nome" placeholder="Nome">
+            </div>
+
+            <div class="col-md-4 mb-3">
+            <input type="text" name="descricao" id="descricao" placeholder="Descrição">
+            </div>
+
+            <div class="col-md-4 mb-3">
+            <input type="number" name="gasto_calorico" id="gasto_calorico" placeholder="Gasto Calorico">
+            </div>
+            <div class="col-md-4 mb-3">
             <label>Ativo</label>
             <input type="checkbox"  value="1" name="ativo" id="ativo">
-            <br>
-            <input id="btnAtividadeFisica" type="submit" class="btn btn-primary" value="Enviar"> 
+            </div>
+            <input id="btnAtividadeFisica" type="submit" class="btn btn-primary btn-lg" value="Enviar"> 
         </form>
         <table>
             <thead>
@@ -28,6 +31,7 @@
                     <th>Descrição</th>
                     <th>Gasto Calórico</th>
                     <th>Ativo</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>

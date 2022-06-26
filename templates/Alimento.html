@@ -3,35 +3,55 @@
 
     <div>
         <h1>Alimento</h1>
-        <form class="col" id="formAlimento" action="/criar_alimento" method="post">
+
+        <form class="form" id="AtivaForm" >
+            
             <label id="label" hidden>Código</label>
             <input type="text" name="codigo" id="codigo" readonly="true" hidden/>
-            </br> 
-            <label>Nome</label>
-            <input type="text" name="nome" id="nome">
-            </br>
-            <label>Descricao</label>
-            <input type="text"  name="descricao" id="descricao">
-            </br>
-            <label>Valor Calorico</label>
-            <input type="number" name="valor_calorico" id="valor_calorico">
-            </br>
-            <label>Valor Gordura</label>
-            <input type="number" name="valor_gordura" id="valor_gordura">
-            </br>
-            <label>Valor Proteina</label>
-            <input type="number" name="valor_proteina" id="valor_proteina">
-            </br>
-            <label>Valor Carboidrato</label>
-            <input type="number" name="valor_carboidrato" id="valor_carboidrato">
-            </br>
-            <label>Ativo</label>
+            <div class="col-md-4 mb-3">
+           
+            </div>
+            <div class="col-md-4 mb-3">
+          
+            <input type="text" name="nome" id="nome" placeholder="Nome">
+         </div>
+         <div class="col-md-4 mb-3">
+           
+            
+            <input type="text"  name="descricao" id="descricao" placeholder="Descrição">
+         </div>
+        
+         <div class="col-md-4 mb-3">
+            
+            <input type="number" name="valor_calorico" id="valor_calorico" placeholder="Valor Calorico">
+            </div>
+            <div class="col-md-4 mb-3">
+            
+            <input type="number" name="valor_gordura" id="valor_gordura" placeholder=" Gorduras ">
+            </div>
+            <div class="col-md-4 mb-3">
+            
+            <input type="number" name="valor_proteina" id="valor_proteina" placeholder="Proteinas">
+            </div>
+            <div class="col-md-4 mb-3">
+            
+            <input type="number" name="valor_carboidrato" id="valor_carboidrato" placeholder="Carboidratos">
+            </div>
+            <div class="col-md-4 mb-3">
+            
+        </div>
+        <div class="col-md-4 mb-3">
+        <label>Ativo</label>
             <input type="checkbox"  value="1" name="ativo" id="ativo">
-            </br>
-            <input id="btnAlimento" type="submit" class="btn btn-primary" value="Enviar">
+        </div>
+        <div class="col-md-4 mb-3">
+            <input id="btnAlimento" type="submit" class="btn btn-primary btn-lg" value="Enviar">
+        </div>
         </form>
+
         <table>
             <thead>
+               
                 <tr>
 
                     <th>Código</th>
@@ -43,12 +63,13 @@
                     <th>Valor Carboidrato</th>
                     <th>ativo</th>
                     <th>Editar</th>
+                    
                 </tr>
             </thead>
             <tbody>
             {% for alimento in alimentos %}
                 <tr>
-                    <td>{{alimento.codigo}}</td>
+                    <td >{{alimento.codigo}}</td>
                     <td>{{alimento.nome}}</td>
                     <td>{{alimento.descricao}}</td>
                     <td>{{alimento.valor_calorico}}</td>
@@ -59,6 +80,7 @@
                     <td><button onclick="carregaDadosDaTabelaParaFormAlimento(this)" type="submit" class="btn btn-primary">Editar</button></td>
                 </tr>
             {% endfor %}
+            
             </tbody>
         </table>
     </div>
