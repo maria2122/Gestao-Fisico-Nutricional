@@ -3,7 +3,6 @@ CREATE DATABASE dbgestaofisiconutricional;
 USE dbgestaofisiconutricional ;
 
 
-
 -- -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 -- CRIAÇÃO OBJETOS BANCO DE DADOS
 -- -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -43,6 +42,7 @@ CREATE TABLE IF NOT EXISTS cardapio (
   data_inicio DATE NOT NULL,
   data_fim DATE NOT NULL,
   usuario_consumidor_id INT NOT NULL,
+  usuario_nutricionista_id INT NOT NULL,
   CONSTRAINT fk_cardapio_usuario
     FOREIGN KEY (usuario_consumidor_id)
     REFERENCES usuario (id)
@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS ficha_atividade (
   data_inicio DATE NOT NULL,
   data_fim DATE NOT NULL,
   usuario_praticante_id INT NOT NULL,
+  usuario_profissional_ed_fisica_id INT NOT NULL,
   CONSTRAINT fk_ficha_atividade_usuario
     FOREIGN KEY (usuario_praticante_id)
     REFERENCES usuario (id)
@@ -247,3 +248,115 @@ INSERT INTO atividade_fisica_ficha(id, atividade_fisica_id, ficha_atividade_id, 
 VALUES(6, 6, 1, 60,5,600);
 
 select * from atividade_fisica_ficha;
+
+
+
+-- -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+-- CONSULTAS
+-- -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+-- -----------------------------------------------------------------------------
+-- Consulta: Resumo de Ficha de Atividade
+-- -----------------------------------------------------------------------------
+DROP VIEW IF EXISTS vw_ficha_atividade_resumo;
+CREATE VIEW vw_ficha_atividade_resumo AS 
+SELECT
+	usuario_praticante.id AS id_praticante,
+	usuario_praticante.nome AS nome_praticante,
+  ficha_atividade.id AS id_ficha,
+	ficha_atividade.data_inicio AS data_inicio_ficha_atividade,
+	ficha_atividade.data_fim AS data_fim_ficha_atividade,
+	atividade_fisica.descricao AS descricao_atividade_fisica,
+	atividade_fisica.gasto_calorico AS gasto_calorico_atividade_fisica,
+	atividade_fisica_ficha.serie AS nr_serie_ficha_item,
+	atividade_fisica_ficha.repeticao AS nr_repeticao_ficha_item,
+	atividade_fisica_ficha.tempo_descanso_segundos AS tempo_descanso_em_segundos,
+												/* 2 Segundos estimados para cada repetição */
+	((atividade_fisica_ficha.serie * (atividade_fisica_ficha.repeticao * 2)) + 
+		atividade_fisica_ficha.tempo_descanso_segundos) AS tempo_minimo_execucao_item_ficha_atividade 	
+FROM ficha_atividade
+LEFT JOIN usuario usuario_prof_ed_fis
+	ON ficha_atividade.usuario_profissional_ed_fisica_id = usuario_prof_ed_fis.id
+INNER JOIN usuario usuario_praticante
+	ON ficha_atividade.usuario_praticante_id = usuario_praticante.id
+INNER JOIN atividade_fisica_ficha
+	ON ficha_atividade.id = atividade_fisica_ficha.ficha_atividade_id
+INNER JOIN atividade_fisica
+	ON atividade_fisica_ficha.atividade_fisica_id = atividade_fisica.id;
+
+SELECT * FROM vw_ficha_atividade_resumo;
+
+SELECT 
+	ficha_resumo.id_praticante,
+	ficha_resumo.nome_praticante,
+	SUM(ficha_resumo.gasto_calorico_atividade_fisica) 
+		AS gasto_calorico_estimado_por_execucao_fichas_vigente_por_hora,
+	SUM(ficha_resumo.tempo_minimo_execucao_item_ficha_atividade) / 60 
+		as Tempo_execucao_minimo_fichas_vigente_em_minutos
+FROM vw_ficha_atividade_resumo AS ficha_resumo
+WHERE CURDATE() between ficha_resumo.data_inicio_ficha_atividade AND ficha_resumo.data_fim_ficha_atividade
+GROUP BY ficha_resumo.id_praticante, ficha_resumo.nome_praticante;
+-- -----------------------------------------------------------------------------
+-- Consulta: Resumo de Cardapio
+-- -----------------------------------------------------------------------------
+DROP VIEW IF EXISTS vw_cardapio_resumo;
+CREATE VIEW vw_cardapio_resumo AS 
+SELECT
+	usuario_consumidor.id,
+	usuario_consumidor.nome,
+	cardapio.data_inicio,
+	cardapio.data_fim,
+	alimento.descricao,
+	alimento.valor_calorico,
+	alimento_cardapio.quantidade	
+FROM cardapio
+LEFT JOIN usuario as usuario_nutricionista
+	ON cardapio.usuario_nutricionista_id = usuario_nutricionista.id
+INNER JOIN usuario as usuario_consumidor
+	ON cardapio.usuario_consumidor_id = usuario_consumidor.id
+INNER JOIN alimento_cardapio
+	ON cardapio.id = alimento_cardapio.cardapio_id
+INNER JOIN alimento
+	ON alimento_cardapio.alimento_id = alimento.id;
+
+SELECT 
+	cardapio_resumo.id,
+	cardapio_resumo.nome,
+	SUM(cardapio_resumo.valor_calorico * cardapio_resumo.quantidade)	AS consumo_diario_cardapio
+FROM vw_cardapio_resumo AS cardapio_resumo
+WHERE '2022-03-30' BETWEEN data_inicio AND data_fim
+GROUP BY cardapio_resumo.id, cardapio_resumo.nome;
+
+
+-- -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+-- PROCEDIMENTO ARMAZENADO - STORED PROCEDURE
+-- -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+-- -----------------------------------------------------------------------------
+-- Calculo de media de tempo mínimo em minutos para execucao de todas fichas no sistema
+-- -----------------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS sp_media_tempo_minimo_em_minuto_execucao_ficha_atividade;
+DELIMITER |
+CREATE PROCEDURE sp_media_tempo_minimo_em_minuto_execucao_ficha_atividade () 
+BEGIN
+	DECLARE tempo_total FLOAT;
+	DECLARE quantidade_fichas FLOAT;
+	DECLARE media_em_minutos FLOAT;
+	
+	SET tempo_total = (	SELECT 
+									SUM(tempo_minimo_execucao_item_ficha_atividade) 
+								FROM vw_ficha_atividade_resumo);
+								
+	SET quantidade_fichas = (	SELECT 
+									COUNT(DISTINCT id_ficha) 
+								FROM vw_ficha_atividade_resumo);
+								
+	SET media_em_minutos = round(tempo_total / quantidade_fichas, 4);
+	
+	SELECT media_em_minutos;
+END
+|
+DELIMITER ;
+-- -----------------------------------------------------------------------------
+-- Chamada Stored Procedure
+-- -----------------------------------------------------------------------------
+CALL sp_media_tempo_minimo_em_minuto_execucao_ficha_atividade();
+
