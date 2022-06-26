@@ -1,7 +1,7 @@
 from re import A
 from dao import AtividadeFisicaDao, AlimentoDao, CardapioDao, FichaAtividadeFisicaDao,UsuarioDao, load_banco_de_dados
 from models import AtividadeFisica, Alimento, Cardapio, FichaAtividadeFisica, Usuario
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect,flash
 
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app.secret_key = "teste"
 DB = "dbgestaofisiconutricional.db"
 atividadefisica_dao = AtividadeFisicaDao(DB)
 alimento_dao = AlimentoDao(DB)
-cardapio_dao = CardapioDao(DB)s
+cardapio_dao = CardapioDao(DB)
 ficha_atividade_fisica_dao = FichaAtividadeFisicaDao(DB)
 usuario_dao = UsuarioDao(DB)
 load_banco_de_dados(DB, "CriaBD")
@@ -23,10 +23,9 @@ def index():
         return redirect('/login')
     return render_template("index.html")
 
+
 @app.route("/ADM")
 def ADM():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     return render_template("ADM.html")
     
 @app.route("/login")
@@ -53,27 +52,23 @@ def autenticador():
     if usuario:
         if usuario.senha == request.form['senha']:
             session['usuario_logado'] = request.form['login']
-            flash(request.form['login']+ ' logado com sucesso!')   
             proxima_pagina = request.form['proxima']
             if proxima_pagina =='':
                 return redirect("/")
             else:
-                
+                flash
                 return redirect('/{}'.format(proxima_pagina))
-    flash('Erro no login')
+
     return redirect('/login')
+            
 
 @app.route("/Cadastro_user")
 def Cadastro_user():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     lista = usuario_dao.listar()
     return render_template("Cadastro_user.html", usuarios=lista)
 
 @app.route("/atividadefisica")
 def atividadefisica():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     lista = atividadefisica_dao.listar()
     # if "usuario_logado" not in session or session["usuario_logado"] == None:
     #     return redirect("/login?proxima=")
@@ -82,9 +77,6 @@ def atividadefisica():
 
 @app.route("/criar_atividadefisica", methods = ["POST", ])
 def criar_atividadefisica():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
-
     nome            = request.form["nome"]
     descricao       = request.form["descricao"]
     gasto_calorico  = request.form["gasto_calorico"]
@@ -100,8 +92,6 @@ def criar_atividadefisica():
 
 @app.route("/alterar_atividadefisica", methods=["POST", ])
 def alterar_atividadefisica():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     codigo          = request.form["codigo"]
     nome            = request.form["nome"]
     descricao       = request.form["descricao"]
@@ -121,15 +111,11 @@ def alterar_atividadefisica():
 
 @app.route("/alimento")
 def alimento():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     lista = alimento_dao.listar()
     return render_template("Alimento.html", alimentos=lista)
 
 @app.route("/criar_alimento", methods = ["POST", ])
 def criar_alimento():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
 #nome, descricao, valor_calorico, valor_gordura, valor_proteina, valor_carboidrato, ativo,  codigo= None)
     nome = request.form["nome"]
     descricao = request.form["descricao"]
@@ -151,8 +137,6 @@ def criar_alimento():
 
 @app.route("/alterar_alimento", methods=["POST", ])
 def alterar_alimento():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     codigo = request.form["codigo"]
     nome = request.form["nome"]
     descricao = request.form["descricao"]
@@ -175,15 +159,11 @@ def alterar_alimento():
 
 @app.route("/cardapio")
 def cardapio():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     lista = cardapio_dao.listar()
     return render_template("Cardapio.html", cardapios=lista)
 
 @app.route("/cria_cardapio", methods = ["POST", ])
 def cria_cardapio():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     data_inicio = request.form["data_inicio"]
     data_fim = request.form["data_fim"]
     novo_cardapio = Cardapio(data_inicio=data_inicio, data_fim=data_fim)
@@ -194,8 +174,6 @@ def cria_cardapio():
 
 @app.route("/alterar_cardapio", methods=["POST", ])
 def alterar_cardapio():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     codigo = request.form["codigo"]
     data_inicio = request.form["data_inicio"]
     data_fim = request.form["data_fim"]
@@ -207,15 +185,11 @@ def alterar_cardapio():
 
 @app.route("/ficha_atividade_fisica")
 def ficha_atividade_fisica():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     lista = ficha_atividade_fisica_dao.listar()
     return render_template("FichaAtividadeFisica.html", ficha_atividade_fisicas=lista)
 
 @app.route("/criar_ficha_atividade_fisica", methods = ["POST", ])
 def criar_ficha_atividade_fisica():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     data_inicio = request.form["data_inicio"]
     data_fim = request.form["data_fim"]
     usuario = request.form["usuario"]
@@ -227,8 +201,6 @@ def criar_ficha_atividade_fisica():
 
 @app.route("/alterar_ficha_atividade_fisica", methods=["POST", ])
 def alterar_ficha_atividade_fisica():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     codigo = request.form["codigo"]
     data_inicio = request.form["data_inicio"]
     data_fim = request.form["data_fim"]
@@ -247,8 +219,6 @@ def usuario():
 
 @app.route("/criar_usuario", methods = ["POST", ])
 def criar_usuario():
-    if 'usuario_logado' not in session or session['usuario_logado']==None:
-        return redirect('/login')
     nome = request.form["nome"]
     login = request.form["login"]
     senha = request.form["senha"]
