@@ -33,14 +33,14 @@ def login():
     proxima=request.args.get('proxima')
     if proxima ==None:
         proxima=''
-    return render_template('login.html',proxima=proxima)
+    return render_template('Login.html',proxima=proxima)
 
 
 @app.route('/logout')
 def logout():
      session['usuario_logado']= None
      flash('nada logado')
-     return render_template('login.html')
+     return render_template('Login.html')
   
 
 
@@ -56,9 +56,7 @@ def autenticador():
             if proxima_pagina =='':
                 return redirect("/")
             else:
-                flash
                 return redirect('/{}'.format(proxima_pagina))
-
     return redirect('/login')
             
 
