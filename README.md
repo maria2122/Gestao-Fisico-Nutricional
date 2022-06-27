@@ -25,4 +25,4 @@ No nosso caso como é um projeto flask somente será necessário executar o segu
 ou 
 """py main.py""" ** dependendo de como a instalação foi feita
 
-"""Link do projeto hospedado no Heroku : https://gest-fisico-nutricional.herokuapp.com/login
+Link do projeto hospedado no Heroku : https://gest-fisico-nutricional.herokuapp.com/login
