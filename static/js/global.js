@@ -108,19 +108,3 @@ function carregaDadosDaTabelaParaFormFichaAtividadeFisica(td){
     
 }
 
-function atualizarSenha(td){
-    //muda value do botão
-    document.getElementById("btnSenha").value = "Alterar";
-    //muda action do formulário para alterar_senha
-    document.getElementById("formSenha").action = "/alterar_senha";
-    // Torna o campo label input do código visível
-    document.getElementById("label").hidden = false;
-    document.getElementById("codigo").hidden = false;
-
-    //armazena linhas da tabela em uma variável
-    const selecaodaLinha = td.parentElement.parentElement;
-
-    ////Carrega o conteudo da linha  da tabela para o formulário.
-    document.getElementById("codigo").value = selecaodaLinha.cells[0].innerHTML;
-    document.getElementById("senha").value = selecaodaLinha.cells[1].innerHTML;
-}

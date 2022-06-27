@@ -1,88 +1,89 @@
 {% extends "Template.html"%}
 {% block conteudo %}
 
-    <div>
-        <h1>Alimento</h1>
+<div>
+    <h1>Alimento</h1>
 
-        <form class="form" id="AtivaForm" >
-            
-            <label id="label" hidden>Código</label>
-            <input type="text" name="codigo" id="codigo" readonly="true" hidden/>
-            <div class="col-md-4 mb-3">
-           
-            </div>
-            <div class="col-md-4 mb-3">
-          
-            <input type="text" name="nome" id="nome" placeholder="Nome">
-         </div>
-         <div class="col-md-4 mb-3">
-           
-            
-            <input type="text"  name="descricao" id="descricao" placeholder="Descrição">
-         </div>
-        
-         <div class="col-md-4 mb-3">
-            
-            <input type="number" name="valor_calorico" id="valor_calorico" placeholder="Valor Calorico">
-            </div>
-            <div class="col-md-4 mb-3">
-            
-            <input type="number" name="valor_gordura" id="valor_gordura" placeholder=" Gorduras ">
-            </div>
-            <div class="col-md-4 mb-3">
-            
-            <input type="number" name="valor_proteina" id="valor_proteina" placeholder="Proteinas">
-            </div>
-            <div class="col-md-4 mb-3">
-            
-            <input type="number" name="valor_carboidrato" id="valor_carboidrato" placeholder="Carboidratos">
-            </div>
-            <div class="col-md-4 mb-3">
-            
+    <form class="form" id="formAlimento">
+
+        <label id="label" hidden>Código</label>
+        <input type="text" name="codigo" id="codigo" readonly="true" hidden />
+        <div class="col-md-4 mb-3">
+
         </div>
         <div class="col-md-4 mb-3">
-        <label>Ativo</label>
-            <input type="checkbox"  value="1" name="ativo" id="ativo">
+
+            <input type="text" name="nome" id="nome" placeholder="Nome">
+        </div>
+        <div class="col-md-4 mb-3">
+
+
+            <input type="text" name="descricao" id="descricao" placeholder="Descrição">
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <input type="number" name="valor_calorico" id="valor_calorico" placeholder="Valor Calorico">
+        </div>
+        <div class="col-md-4 mb-3">
+
+            <input type="number" name="valor_gordura" id="valor_gordura" placeholder=" Gorduras ">
+        </div>
+        <div class="col-md-4 mb-3">
+
+            <input type="number" name="valor_proteina" id="valor_proteina" placeholder="Proteinas">
+        </div>
+        <div class="col-md-4 mb-3">
+
+            <input type="number" name="valor_carboidrato" id="valor_carboidrato" placeholder="Carboidratos">
+        </div>
+        <div class="col-md-4 mb-3">
+
+        </div>
+        <div class="col-md-4 mb-3">
+            <label>Ativo</label>
+            <input type="checkbox" value="1" name="ativo" id="ativo">
         </div>
         <div class="col-md-4 mb-3">
             <input id="btnAlimento" type="submit" class="btn btn-primary btn-lg" value="Enviar">
         </div>
-        </form>
+    </form>
 
-        <table>
-            <thead>
-               
-                <tr>
+    <table>
+        <thead>
 
-                    <th>Código</th>
-                    <th>Nome</th>
-                    <th>Descricao</th>
-                    <th>Valor Calórico</th>
-                    <th>Valor Gordura</th>
-                    <th>Valor Proteína</th>
-                    <th>Valor Carboidrato</th>
-                    <th>ativo</th>
-                    <th>Editar</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
+            <tr>
+
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Descricao</th>
+                <th>Valor Calórico</th>
+                <th>Valor Gordura</th>
+                <th>Valor Proteína</th>
+                <th>Valor Carboidrato</th>
+                <th>ativo</th>
+                <th>Editar</th>
+
+            </tr>
+        </thead>
+        <tbody>
             {% for alimento in alimentos %}
-                <tr>
-                    <td >{{alimento.codigo}}</td>
-                    <td>{{alimento.nome}}</td>
-                    <td>{{alimento.descricao}}</td>
-                    <td>{{alimento.valor_calorico}}</td>
-                    <td>{{alimento.valor_gordura}}</td>
-                    <td>{{alimento.valor_proteina}}</td>
-                    <td>{{alimento.valor_carboidrato}}</td>
-                    <td>{{alimento.ativo}}</td>
-                    <td><button onclick="carregaDadosDaTabelaParaFormAlimento(this)" type="submit" class="btn btn-primary">Editar</button></td>
-                </tr>
+            <tr>
+                <td>{{alimento.codigo}}</td>
+                <td>{{alimento.nome}}</td>
+                <td>{{alimento.descricao}}</td>
+                <td>{{alimento.valor_calorico}}</td>
+                <td>{{alimento.valor_gordura}}</td>
+                <td>{{alimento.valor_proteina}}</td>
+                <td>{{alimento.valor_carboidrato}}</td>
+                <td>{{alimento.ativo}}</td>
+                <td><button onclick="carregaDadosDaTabelaParaFormAlimento(this)" type="submit"
+                        class="btn btn-primary">Editar</button></td>
+            </tr>
             {% endfor %}
-            
-            </tbody>
-        </table>
-    </div>
-    
+
+        </tbody>
+    </table>
+</div>
+
 {%endblock %}
