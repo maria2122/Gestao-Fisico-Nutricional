@@ -38,7 +38,7 @@ INSERT INTO usuario(id, nome, login, senha, cliente, profissional_ed_fisica, nut
 VALUES(4,"Antonio Carlos Silva","antonio.carlos","123", 1, 0, 0, 0);
 
 INSERT INTO usuario(id, nome, login, senha, cliente, profissional_ed_fisica, nutricionista, administrador)
-VALUES(4,"Marcelo Fassbinder","marcelo.fassbinder","5656", 0, 0, 0, 1);
+VALUES(5,"Marcelo Fassbinder","marcelo.fassbinder","5656", 0, 0, 0, 1);
 
 
 
