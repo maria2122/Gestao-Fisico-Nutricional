@@ -39,7 +39,7 @@ def login():
 @app.route('/logout')
 def logout():
      session['usuario_logado']= None
-     flash('nada logado')
+     flash('Logout realizado com sucesso!')
      return render_template('Login.html')
   
 
